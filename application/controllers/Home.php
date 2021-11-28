@@ -10,13 +10,20 @@ class Home extends CI_Controller {
   }
 
   public function index() {
-    $this->load->view('home'); //Buat landing page ntar
+    $data = [
+      'title' => 'Booking Facility Website — Kelompok 2'
+    ];
+
+    $this->template->load('template/template_home', 'home', $data);
   }
 
   //Buka view register
   public function register() {
-    $data['style'] = $this->load->view('include/style', NULL, TRUE);
-    $this->load->view('pages/register', $data);
+    $data = [
+      'title' => 'Booking Facility Website — Register'
+    ];
+
+    $this->template->load('template/template_home', 'pages/register', $data);
   }
 
   //Cek Rules Register
@@ -41,6 +48,10 @@ class Home extends CI_Controller {
 
   //Menampilkan view login
   public function login() {
+    $data = [
+      'title' => 'Booking Facility Website — Login'
+    ];
+
     $loginStatus = 0;
     $this->form_validation->set_rules('email', 'Email', "valid_email");
 
@@ -50,9 +61,9 @@ class Home extends CI_Controller {
 
 
     if (!$this->form_validation->run() || !$loginStatus) {
-      $this->load->view('pages/login'); //login gagal
+      $this->template->load('template/template_home', 'pages/login', $data); //login gagal
     } else {
-      redirect("pages/landing_page");
+      redirect("home");
     }
   }
 }

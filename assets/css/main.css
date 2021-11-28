@@ -11,7 +11,10 @@ html {
 	font-family: "Roboto", sans-serif;
 }
 
-.home__wrapper {
+/* HOME PAGE */
+.home__wrapper,
+.register__wrapper,
+.login__wrapper {
 	border-radius: 6px;
 	box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.4);
 	position: absolute;
@@ -62,3 +65,39 @@ html {
 	margin-bottom: 2rem;
 	text-decoration: underline;
 }
+
+/* REGISTER PAGE */
+.register__wrapper {
+	width: 30%;
+	padding: 3rem;
+}
+
+.register__main-title {
+	font-weight: 700;
+}
+
+.form-label,
+.register__footer {
+	color: #242424;
+	font-size: 1.6rem !important;
+}
+
+.register__redirect,
+.form-control {
+	text-decoration: none;
+	font-size: 1.6rem;
+}
+
+.form-control {
+	padding: 6px 12px;
+}
+
+.register__button {
+	font-size: 1.6rem;
+	font-weight: 500;
+	background-color: #ccc;
+	padding: 6px 14px;
+	margin-bottom: 2rem;
+}
+
+/* LOGIN PAGE */
