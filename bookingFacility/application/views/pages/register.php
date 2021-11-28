@@ -38,6 +38,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			
 					<button type="submit" class="btn btn-primary">Register</button>
 				</form>
+                <div style="margin: 2% 0 0 43%">
+                    <a href="<?php echo base_url('index.php/home/login')?>">Return to Login Page</a>
+                </div>
 			</div>
 		</div>
 	</div>		
