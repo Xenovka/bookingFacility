@@ -9,8 +9,12 @@ class Home extends CI_Controller {
 	}
 
 	public function index()
-	{
-        $this->load->view('home'); //Buat landing page ntar
+	{	
+			$data = [
+				'title' => 'Booking Facility - Kelompok 2'
+			];
+			
+      $this->template->load('template/template_home', 'home', $data);
 	}
 
     //Buka view register
