@@ -67,12 +67,14 @@ html {
 }
 
 /* REGISTER PAGE */
-.register__wrapper {
+.register__wrapper,
+.login__wrapper {
 	width: 30%;
 	padding: 3rem;
 }
 
-.register__main-title {
+.register__main-title,
+.login__main-title {
 	font-weight: 700;
 }
 
@@ -92,11 +94,12 @@ html {
 	padding: 6px 12px;
 }
 
-.register__button {
+.register__button,
+.login__button {
 	font-size: 1.6rem;
 	font-weight: 500;
 	background-color: #ccc;
-	padding: 6px 14px;
+	padding: 6px 16px;
 	margin-bottom: 2rem;
 }
 
