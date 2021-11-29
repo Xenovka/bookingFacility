@@ -28,4 +28,14 @@ class Auth extends CI_Model {
       return 0;
     }
   }
+
+  public function getAllUser() {
+    $this->listUser = $this->db->query("SELECT * FROM user");
+    $this->listUser = $this->listUser->result_array();
+    return $this->listUser;
+  }
+
+  public function deleteUser($id) {
+    $query = $this->db->query("DELETE FROM user WHERE UserID = '$id'");
+  }
 }

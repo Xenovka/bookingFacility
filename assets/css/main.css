@@ -104,3 +104,9 @@ html {
 }
 
 /* LOGIN PAGE */
+
+/* USER LISTING */
+.sementara th,
+.sementara td{
+	font-size: 1.6rem;
+}
