@@ -17,9 +17,7 @@
               <td>{$each['Username']}</td>
               <td>{$each['Email']}</td>
               <td>{$each['Role']}</td>
-              <td>
-                <a href=".site_url("admin/editUser/{$each['UserID']}")." style='width:20%' class='btn btn-primary'>Edit</a>
-                <a onclick=\"return confirm('Anda yakin ingin menghapus {$each['Username']} ?')\" title='Delete {$each['Username']}' href='" . site_url("admin/deleteUser/{$each['UserID']}") . "' style='width:20%' class='btn btn-danger'>X</a></td>
+              <td><a onclick=\"return confirm('Anda yakin ingin menghapus {$each['Username']} ?')\" title='Delete {$each['Username']}' href='" . site_url("admin/deleteUser/{$each['UserID']}") . "' style='width:20%' class='btn btn-danger'>X</a></td>
             </tr>
           ";
         // Buat foto siapa tau ntar dipake
