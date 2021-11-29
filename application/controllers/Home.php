@@ -63,7 +63,7 @@ class Home extends CI_Controller {
     if (!$this->form_validation->run() || !$loginStatus) {
       $this->template->load('template/template_home', 'pages/login', $data); //login gagal
     } else {
-      redirect("home");
+      redirect("admin");
     }
   }
 }
