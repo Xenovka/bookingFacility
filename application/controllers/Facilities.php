@@ -21,7 +21,7 @@ class Facilities extends CI_Controller {
     $crud->display_as('FacilityID','Facility ID');
     $crud->change_field_type('Password','password');
     $crud->edit_fields('FacilityName', 'Image');
-    $crud->set_field_upload('Image','assets/images');
+    $crud->set_field_upload('Image','assets/images/facility');
 
     $output = $crud->render();
     $data['crud'] = get_object_vars($output);
