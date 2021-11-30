@@ -1,5 +1,20 @@
 <div class="container login__wrapper">
   <h1 class="text-center mb-5 login__main-title">Login Here</h1>
+  
+  <?php
+    // if($this->session->flashdata('fail_captcha'))
+    // {
+    //   echo '<div class="alert alert-danger">';
+    //   echo $this->session->flashdata('fail_captcha');
+    //   echo '</div>';
+    // }
+    // if($this->session->flashdata('success_captcha'))
+    // {
+    //   echo '<div class="alert alert-success">';
+    //   echo $this->session->flashdata('success_captcha');
+    //   echo '</div>';
+    // }
+  ?>
   <form action="<?= site_url("/home/login") ?>" method="POST">
     <div class="mb-3">
       <label class="form-label" for="email">Email</label>
@@ -19,7 +34,7 @@
         unset($_SESSION['error']);
       }
     ?>
-
+    <div class="g-recaptcha" data-sitekey="<?php echo $this->config->item('google_key') ?>"></div> 
     <button class="btn login__button" type="submit">Submit</button>
   </form>
 
