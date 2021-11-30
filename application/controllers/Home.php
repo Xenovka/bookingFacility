@@ -31,48 +31,20 @@ class Home extends CI_Controller {
     $this->form_validation->set_rules('username', 'username', 'trim|required|min_length[1]|max_length[255]|is_unique[user.username]');
     $this->form_validation->set_rules('email', 'email', 'trim|required|min_length[1]|max_length[255]|valid_email');
     $this->form_validation->set_rules('password', 'password', 'trim|required|min_length[1]|max_length[255]');
-    
-    $recaptchaResponse = trim($this->input->post('g-recaptcha-response'));
-    if($recaptchaResponse != '')
-		{
-			$userIp=$this->input->ip_address();
-     
-      $secret = $this->config->item('google_secret');
-   
-      $url="https://www.google.com/recaptcha/api/siteverify?secret=".$secret."&response=".$recaptchaResponse."&remoteip=".$userIp;
-      $ch = curl_init(); 
-      curl_setopt($ch, CURLOPT_URL, $url); 
-      // curl_setopt($ch, CURLOPT_POST, true); 
-      // curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($check)); 
-      // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); 
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
-      $output = curl_exec($ch); 
-      curl_close($ch);      
-      $status= json_decode($output, true);
-      if ($status['success']) {
-        if ($this->form_validation->run() == true) //Kalau sesuai rules insert ke DB
-        {
-          $username = $this->input->post('username');
-          $email = $this->input->post('email');
-          $password = $this->input->post('password');
-          $this->auth->register($username, $email, $password);
-          $this->session->set_flashdata('success_register', 'Proses Pendaftaran User Berhasil');
-        } else //Kalau ga sesuai balik ke register + bawa validation errornya
-        {
-          $this->session->set_flashdata('error', validation_errors());
-          redirect('home/register');
-        }
-        $this->session->set_flashdata('success_captcha', 'Login Success');
-        redirect('home/login'); //Terus masuk ke login;
-      }else{
-          $this->session->set_flashdata('fail_captcha', 'Sorry Google Recaptcha Unsuccessful!!');
-          redirect('home/register');
-      }
-    }else{
-      $this->session->set_flashdata('fail_captcha', 'Sorry Google Recaptcha Unsuccessful!!');
+    if ($this->form_validation->run() == true) //Kalau sesuai rules insert ke DB
+    {
+      $username = $this->input->post('username');
+      $email = $this->input->post('email');
+      $password = $this->input->post('password');
+      $this->auth->register($username, $email, $password);
+      $this->session->set_flashdata('success_register', 'Proses Pendaftaran User Berhasil');
+      redirect('home/login'); //Terus masuk ke login
+    } else //Kalau ga sesuai balik ke register + bawa validation errornya
+    {
+      $this->session->set_flashdata('error', validation_errors());
       redirect('home/register');
+    }
   }
-}
 
   //Menampilkan view login
   public function login() {
@@ -81,36 +53,17 @@ class Home extends CI_Controller {
     ];
 
     $loginStatus = 0;
-
     $this->form_validation->set_rules('email', 'Email', "valid_email");
 
-    $recaptchaResponse = trim($this->input->post('g-recaptcha-response'));
-    if($recaptchaResponse != ''){
-			$userIp=$this->input->ip_address();
-      $secret = $this->config->item('google_secret');
-      $url="https://www.google.com/recaptcha/api/siteverify?secret=".$secret."&response=".$recaptchaResponse."&remoteip=".$userIp;
-      $ch = curl_init(); 
-      curl_setopt($ch, CURLOPT_URL, $url);  
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
-      $output = curl_exec($ch); 
-      curl_close($ch);      
-      $status= json_decode($output, true);
-      if ($status['success']) {
-        if ($this->input->post('email') != null && $this->input->post('password') != NULL) {
-          $loginStatus = $this->auth->login($this->input->post('email'), $this->input->post('password'));
-        }
-        if (!$this->form_validation->run() || !$loginStatus) {
-          $this->template->load('template/template_home', 'pages/login', $data); //login gagal
-        } else {
-          redirect("admin");
-        }
-      }else{
-        $this->session->set_flashdata('fail_captcha', 'Sorry Google Recaptcha Unsuccessful!!');
-        redirect('home/register');
+    if ($this->input->post('email') != null && $this->input->post('password') != NULL) {
+      $loginStatus = $this->auth->login($this->input->post('email'), $this->input->post('password'));
     }
-    }else{
-      $this->session->set_flashdata('fail_captcha', 'Sorry Google Recaptcha Unsuccessful!!');
-      redirect('home/register');
+
+
+    if (!$this->form_validation->run() || !$loginStatus) {
+      $this->template->load('template/template_home', 'pages/login', $data); //login gagal
+    } else {
+      redirect("admin");
     }
   }
 }

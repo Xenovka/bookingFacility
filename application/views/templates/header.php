@@ -45,7 +45,7 @@
             <a class="nav-link" href="<?= site_url("admin") ?>">Users</a>
           </li>
           <li class="nav-item me-2 <?php if ($this->uri->segment(3, NULL) == 'facilities') echo 'currentPage' ?>">
-            <a class="nav-link" href="<?= site_url("admin/facilities") ?>">Facilities</a>
+            <a class="nav-link" href="<?= site_url("facilities") ?>">Facilities</a>
           </li>
           <li class="nav-item">
             <select onchange="logout()" class="form-select form-select-sm mt-1" aria-label=".form-select-sm example">

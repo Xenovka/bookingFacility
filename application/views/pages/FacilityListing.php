@@ -18,8 +18,8 @@
                  <img width='110px' src='".base_url($each['Image'])."' alt='Foto {$each['FacilityName']}'>
              </td>
               <td>
-                <a href=".site_url("admin/editFacility/{$each['FacilityID']}")." style='width:20%' class='btn btn-primary'>Edit</a>
-                <a onclick=\"return confirm('Anda yakin ingin menghapus {$each['FacilityName']} ?')\" title='Delete {$each['FacilityName']}' href='" . site_url("admin/deleteFacility/{$each['FacilityID']}") . "' style='width:20%' class='btn btn-danger'>X</a></td>
+                <a href=".site_url("facilities/editFacility/{$each['FacilityID']}")." style='width:20%' class='btn btn-primary'>Edit</a>
+                <a onclick=\"return confirm('Anda yakin ingin menghapus {$each['FacilityName']} ?')\" title='Delete {$each['FacilityName']}' href='" . site_url("facilities/deleteFacility/{$each['FacilityID']}") . "' style='width:20%' class='btn btn-danger'>X</a></td>
             </tr>
           ";
       }

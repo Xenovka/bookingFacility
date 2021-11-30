@@ -10,18 +10,17 @@ class Facility extends CI_Model {
     return $this->listFacility;
   }
 
-//   public function getOneUser($id) {
-//     $this->listUser = $this->db->query("SELECT * FROM user WHERE UserID = $id");
-//     $this->listUser = $this->listUser->result_array();
-//     return $this->listUser;
-//   }
+  public function getOneFacility($id) {
+    $this->listFacility = $this->db->query("SELECT * FROM facility WHERE FacilityID = $id");
+    $this->listFacility = $this->listFacility->result_array();
+    return $this->listFacility;
+  }
 
-//   public function deleteUser($id) {
-//     $query = $this->db->query("DELETE FROM user WHERE UserID = '$id'");
-//   }
+  public function deleteFacility($id) {
+    $query = $this->db->query("DELETE FROM facility WHERE FacilityID = '$id'");
+  }
 
-//   public function edit($id, $user, $email){
-//     $this->db->query("UPDATE user SET Username='$user' WHERE UserID = '$id'");
-//     $this->db->query("UPDATE user SET Email='$email' WHERE UserID = '$id'");
-//   }
+  public function edit($id, $name){
+    $this->db->query("UPDATE facility SET FacilityName='$name' WHERE FacilityID = '$id'");
+  }
 }
