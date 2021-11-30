@@ -17,9 +17,16 @@ class Admin extends CI_Controller {
       $crud->set_theme('tablestrap');
       $crud->set_table('user');
       $crud->set_subject('User');
+<<<<<<< Updated upstream
       $crud->columns('Username', 'Email', 'Role'); //Tampilkan semua kecuali password
       $crud->change_field_type('Password','assword');
       $crud->edit_fields('Username', 'Email', 'Role');
+=======
+      $crud->columns('UserID','Username', 'Email', 'Role'); //Tampilkan semua kecuali password
+      $crud->change_field_type('Password','password');
+      $crud->edit_fields('Username', 'Email', 'Role');
+      $crud->add_fields('Username', 'Email', 'Password', 'Role');
+>>>>>>> Stashed changes
 
       //Untuk hash password
       $crud->callback_before_insert(array($this,'encrypt_password_callback'));

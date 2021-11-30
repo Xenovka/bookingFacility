@@ -11,67 +11,24 @@ class Facilities extends CI_Controller {
     $data = [
       'title' => 'Booking Facility Website — Facility Listing'
     ];
+    $this->load->library('grocery_CRUD');
+    $crud = new grocery_CRUD();
+    $crud->set_theme('tablestrap');
+    $crud->set_table('facility');
+    $crud->set_subject('Facility');
+    $crud->columns('FacilityID', 'FacilityName', 'Image');
+    $crud->display_as('FacilityName','Facility Name');
+    $crud->display_as('FacilityID','Facility ID');
+    $crud->change_field_type('Password','password');
+    $crud->edit_fields('FacilityName', 'Image');
+    $crud->set_field_upload('Image','assets/images');
 
-    $data['facility'] = $this->facility->getAllfacility();
+    $output = $crud->render();
+    $data['crud'] = get_object_vars($output);
+    $data['style'] = $this->load->view('include/style', $data, TRUE);
+    $data['script'] = $this->load->view('include/script', $data, TRUE);  
     $data['header'] = $this->load->view("templates/header");
     $data['footer'] = $this->load->view("templates/footer");
     $this->template->load('template/template_home', 'pages/facility/FacilityListing', $data);
-  }
-
-  public function deleteFacility($id) {
-    $this->facility->deleteFacility($id);
-    redirect(site_url("facilities"));
-  }
-
-  public function editFacility($id) {
-    $data = [
-      'title' => 'Booking Facility Website — Edit Facility'
-    ];
-      $data['facility'] = $this->facility->getOneFacility($id);
-      $data['header'] = $this->load->view("templates/header");
-      $data['footer'] = $this->load->view("templates/footer");
-      $this->template->load('template/template_home', 'pages/facility/editFacility', $data);
-  }
-
-  public function editCheck(){
-    $this->form_validation->set_rules('FacilityName', 'FacilityName', 'trim|required|min_length[1]|max_length[255]');
-    $FacilityID = $this->input->post('FacilityID');
-    if ($this->form_validation->run() == true) //Kalau sesuai rules update ke DB
-    {
-      $Facilityname = $this->input->post('FacilityName');
-      $this->facility->edit($FacilityID, $Facilityname);
-      $this->session->set_flashdata('success_edit', 'Proses Pendaftaran Facility Berhasil');
-      redirect('facilities'); //Terus masuk ke facilities
-    } else //Kalau ga sesuai balik ke edit page + bawa validation errornya
-    {
-      $this->session->set_flashdata('error', validation_errors());
-      redirect('facilities/editFacility/'.$FacilityID);
-    }
-  }
-
-  public function addFacility(){
-    $data = [
-      'title' => 'Booking Facility Website — Add Facility'
-    ];
-    $data['header'] = $this->load->view("templates/header");
-    $data['footer'] = $this->load->view("templates/footer");
-    $this->template->load('template/template_home', 'pages/facility/addFacility', $data);
-  }
-
-  public function addCheck(){
-    $this->form_validation->set_rules('FacilityName', 'FacilityName', 'trim|required|min_length[1]|max_length[255]');
-    $this->form_validation->set_rules('image', 'image', 'trim|required');
-    if ($this->form_validation->run() == true) //Kalau sesuai rules insert ke DB
-    {
-      $FacilityName = $this->input->post('FacilityName');
-      $image = $this->input->post('image');
-      $this->facility->add($FacilityName, $image);
-      $this->session->set_flashdata('success_add', 'Proses Pendaftaran Facility Berhasil');
-      redirect('facilities'); //Terus masuk ke facility listing
-    } else //Kalau ga sesuai balik ke add + bawa validation errornya
-    {
-      $this->session->set_flashdata('error', validation_errors());
-      redirect('facilities/addFacility');
-    }
   }
 }
