@@ -8,13 +8,6 @@ class Admin extends CI_Controller {
   }
 
   public function index(){
-<<<<<<< Updated upstream
-    $data['title'] = 'Booking Facility Website — User Listing';
-    $data['user'] = $this->auth->getAllUser();
-    $data['header'] = $this->load->view("templates/header");
-    $data['footer'] = $this->load->view("templates/footer");
-    $this->template->load('template/template_home', 'pages/UserListing', $data);
-=======
     $data = [
         'title' => 'Booking Facility Website — User Listing'
       ];
@@ -23,7 +16,6 @@ class Admin extends CI_Controller {
       $data['header'] = $this->load->view("templates/header");
       $data['footer'] = $this->load->view("templates/footer");
       $this->template->load('template/template_home', 'pages/user/UserListing', $data);
->>>>>>> Stashed changes
   }
 
   public function deleteUser($id) {

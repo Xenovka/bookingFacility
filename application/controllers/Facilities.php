@@ -48,4 +48,30 @@ class Facilities extends CI_Controller {
       redirect('facilities/editFacility/'.$FacilityID);
     }
   }
+
+  public function addFacility(){
+    $data = [
+      'title' => 'Booking Facility Website — Add Facility'
+    ];
+    $data['header'] = $this->load->view("templates/header");
+    $data['footer'] = $this->load->view("templates/footer");
+    $this->template->load('template/template_home', 'pages/facility/addFacility', $data);
+  }
+
+  public function addCheck(){
+    $this->form_validation->set_rules('FacilityName', 'FacilityName', 'trim|required|min_length[1]|max_length[255]');
+    $this->form_validation->set_rules('image', 'image', 'trim|required');
+    if ($this->form_validation->run() == true) //Kalau sesuai rules insert ke DB
+    {
+      $FacilityName = $this->input->post('FacilityName');
+      $image = $this->input->post('image');
+      $this->facility->add($FacilityName, $image);
+      $this->session->set_flashdata('success_add', 'Proses Pendaftaran Facility Berhasil');
+      redirect('facilities'); //Terus masuk ke facility listing
+    } else //Kalau ga sesuai balik ke add + bawa validation errornya
+    {
+      $this->session->set_flashdata('error', validation_errors());
+      redirect('facilities/addFacility');
+    }
+  }
 }

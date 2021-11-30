@@ -23,4 +23,12 @@ class Facility extends CI_Model {
   public function edit($id, $name){
     $this->db->query("UPDATE facility SET FacilityName='$name' WHERE FacilityID = '$id'");
   }
+
+  public function add($FacilityName, $image){
+    $data_Facility = array(
+      'FacilityName' => $FacilityName,
+      'Image' => $image
+    );
+    $this->db->insert('Facility', $data_Facility);
+  }
 }

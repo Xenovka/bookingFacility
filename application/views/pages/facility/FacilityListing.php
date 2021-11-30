@@ -1,4 +1,5 @@
 <div class="container pt-3">
+<a style="float:right" href="facilities/addFacility"><button class="btn btn-primary">Add</button></a>
   <table class='table table-striped' id="dataTable">
     <thead class='sementara'>
       <th>Facility ID</th>
