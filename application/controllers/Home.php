@@ -10,19 +10,14 @@ class Home extends CI_Controller {
   }
 
   public function index() {
-    $data = [
-      'title' => 'Booking Facility Website — Kelompok 2'
-    ];
+    $data['title'] = 'Booking Facility Website — Kelompok 2';
 
     $this->template->load('template/template_home', 'home', $data);
   }
 
   //Buka view register
   public function register() {
-    $data = [
-      'title' => 'Booking Facility Website — Register'
-    ];
-
+    $data['title'] = 'Booking Facility Website — Register';
     $this->template->load('template/template_home', 'pages/register', $data);
   }
 
@@ -48,9 +43,7 @@ class Home extends CI_Controller {
 
   //Menampilkan view login
   public function login() {
-    $data = [
-      'title' => 'Booking Facility Website — Login'
-    ];
+    $data['title'] = 'Booking Facility Website — Login';
 
     $loginStatus = 0;
     $this->form_validation->set_rules('email', 'Email', "valid_email");

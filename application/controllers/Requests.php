@@ -7,11 +7,7 @@ class Requests extends CI_Controller {
     $this->load->model('grocery_crud_model'); //Model untuk user
   }
 
-  public function index(){
-    $data = [
-        'title' => 'Booking Facility Website — Request Listing'
-      ];
-  
+  public function index(){  
       $this->load->library('grocery_CRUD');
       $crud = new grocery_CRUD();
       $crud->set_theme('tablestrap');
@@ -26,10 +22,7 @@ class Requests extends CI_Controller {
 
       $output = $crud->render();
       $data['crud'] = get_object_vars($output);
-      $data['style'] = $this->load->view('include/style', $data, TRUE);
-      $data['script'] = $this->load->view('include/script', $data, TRUE);      
-      $data['header'] = $this->load->view("templates/header");
-      $data['footer'] = $this->load->view("templates/footer");
+      $data['title'] = 'Booking Facility Website — Request Listing';
       $this->template->load('template/template_home', 'pages/RequestListing', $data);
   }
 }

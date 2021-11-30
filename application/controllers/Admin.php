@@ -8,10 +8,6 @@ class Admin extends CI_Controller {
   }
 
   public function index(){
-    $data = [
-        'title' => 'Booking Facility Website — User Listing'
-      ];
-  
       $this->load->library('grocery_CRUD');
       $crud = new grocery_CRUD();
       $crud->set_theme('tablestrap');
@@ -29,10 +25,7 @@ class Admin extends CI_Controller {
 
       $output = $crud->render();
       $data['crud'] = get_object_vars($output);
-      $data['style'] = $this->load->view('include/style', $data, TRUE);
-      $data['script'] = $this->load->view('include/script', $data, TRUE);      
-      $data['header'] = $this->load->view("templates/header");
-      $data['footer'] = $this->load->view("templates/footer");
+      $data['title'] = 'Booking Facility Website — User Listing';
       $this->template->load('template/template_home', 'pages/UserListing', $data);
   }
 

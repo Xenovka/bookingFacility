@@ -8,9 +8,6 @@ class Facilities extends CI_Controller {
   }
 
   public function index(){
-    $data = [
-      'title' => 'Booking Facility Website — Facility Listing'
-    ];
     $this->load->library('grocery_CRUD');
     $crud = new grocery_CRUD();
     $crud->set_theme('tablestrap');
@@ -24,11 +21,8 @@ class Facilities extends CI_Controller {
     $crud->set_field_upload('Image','assets/images/facility');
 
     $output = $crud->render();
+    $data['title'] = 'Booking Facility Website — Facility Listing';
     $data['crud'] = get_object_vars($output);
-    $data['style'] = $this->load->view('include/style', $data, TRUE);
-    $data['script'] = $this->load->view('include/script', $data, TRUE);  
-    $data['header'] = $this->load->view("templates/header");
-    $data['footer'] = $this->load->view("templates/footer");
     $this->template->load('template/template_home', 'pages/FacilityListing', $data);
   }
 }

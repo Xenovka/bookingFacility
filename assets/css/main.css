@@ -4,7 +4,7 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	/* font-size: 62.5%; */
+	font-size: 62.5%;
 }
 
 html {
@@ -107,6 +107,6 @@ html {
 
 /* USER LISTING */
 .sementara th,
-.sementara td{
+.sementara td {
 	font-size: 1.6rem;
 }
