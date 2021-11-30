@@ -9,6 +9,7 @@ class Admin extends CI_Controller {
 
   public function index() {
     $data = [
+<<<<<<< Updated upstream
       'title' => 'Booking Facility Website — User Listing'
     ];
 
@@ -36,6 +37,36 @@ class Admin extends CI_Controller {
   }
 
   function encrypt_password_callback($post_array, $primary_key = null) {
+=======
+        'title' => 'Booking Facility Website — User Listing'
+      ];
+  
+      $this->load->library('grocery_CRUD');
+      $crud = new grocery_CRUD();
+      $crud->set_theme('tablestrap');
+      $crud->set_table('user');
+      $crud->set_subject('User');
+      $crud->columns('UserID','Username', 'Email', 'Role'); //Tampilkan semua kecuali password
+      $crud->change_field_type('Password','password');
+      $crud->edit_fields('Username', 'Email', 'Role');
+      $crud->add_fields('Username', 'Email', 'Password', 'Role');
+      $crud->set_relation('Role','role','RoleName');
+
+      //Untuk hash password
+      $crud->callback_before_insert(array($this,'encrypt_password_callback'));
+      $crud->callback_before_update(array($this,'encrypt_password_callback'));
+
+      $output = $crud->render();
+      $data['crud'] = get_object_vars($output);
+      $data['style'] = $this->load->view('include/style', $data, TRUE);
+      $data['script'] = $this->load->view('include/script', $data, TRUE);      
+      $data['header'] = $this->load->view("templates/header");
+      $data['footer'] = $this->load->view("templates/footer");
+      $this->template->load('template/template_home', 'pages/UserListing', $data);
+  }
+
+  function encrypt_password_callback($post_array, $primary_key = null){
+>>>>>>> Stashed changes
     $post_array['Password'] = password_hash($post_array['Password'], PASSWORD_DEFAULT);
     return $post_array;
   }
