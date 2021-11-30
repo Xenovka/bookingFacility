@@ -21,6 +21,8 @@ class Requests extends CI_Controller {
       $crud->change_field_type('EndTime','time');
       $crud->set_relation('RequesterID','user','Username');
       $crud->set_relation('ReqFacilityID','facility','FacilityName');
+      $crud->unset_add();
+      $crud->unset_edit();
 
       $output = $crud->render();
       $data['crud'] = get_object_vars($output);
