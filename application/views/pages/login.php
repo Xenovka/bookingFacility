@@ -5,19 +5,19 @@
       <label class="form-label" for="email">Email</label>
       <input class="form-control" id='email' type="email" name="email" placeholder="Input Email">
     </div>
-    <?= form_error('email', "<p class='alert alert-danger'>", "</p>") ?>
+    <p class="alert alert-danger"><?= form_error('email') ?></p>
 
     <div class="mb-3">
       <label class="form-label" for="password">Password</label>
       <input class="form-control" id='password' type="password" name="password" placeholder="Input Password ">
     </div>
-    <!-- <p class="alert alert-danger"><?= form_error('password') ?></p> -->
+    <p class="alert alert-danger"><?= form_error('password') ?></p>
 
     <?php
-    if (isset($_SESSION['error'])) {
-      echo "<p class='alert alert-danger'>" . $_SESSION['error'] . "</p>";
-      unset($_SESSION['error']);
-    }
+      if (isset($_SESSION['error'])) {
+        echo "<p style='color: red'>" . $_SESSION['error'] . "<p>";
+        unset($_SESSION['error']);
+      }
     ?>
 
     <button class="btn login__button" type="submit">Submit</button>

@@ -47,6 +47,9 @@
           <li class="nav-item me-2 <?php if ($this->uri->segment(3, NULL) == 'facilities') echo 'currentPage' ?>">
             <a class="nav-link" href="<?= site_url("facilities") ?>">Facilities</a>
           </li>
+          <li class="nav-item me-2 <?php if ($this->uri->segment(3, NULL) == 'requests') echo 'currentPage' ?>">
+            <a class="nav-link" href="<?= site_url("requests") ?>">Requests</a>
+          </li>
           <li class="nav-item">
             <select onchange="logout()" class="form-select form-select-sm mt-1" aria-label=".form-select-sm example">
               <option disabled selected hidden value="">Halo, <?php echo (isset($_SESSION["accountFullName"])) ? $_SESSION["accountFullName"] : "login dulu ya..."; ?></option> <!-- controller method tidak ada && status belum login ? -->

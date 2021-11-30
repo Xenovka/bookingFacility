@@ -4,7 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Facilities extends CI_Controller {
   function __construct() {
     parent::__construct();
-    $this->load->model('facility'); //Model untuk facility
+    $this->load->model('grocery_crud_model'); //Model untuk facility
   }
 
   public function index(){
@@ -29,6 +29,6 @@ class Facilities extends CI_Controller {
     $data['script'] = $this->load->view('include/script', $data, TRUE);  
     $data['header'] = $this->load->view("templates/header");
     $data['footer'] = $this->load->view("templates/footer");
-    $this->template->load('template/template_home', 'pages/facility/FacilityListing', $data);
+    $this->template->load('template/template_home', 'pages/FacilityListing', $data);
   }
 }
