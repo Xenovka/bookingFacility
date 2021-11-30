@@ -8,6 +8,7 @@
     $('#dataTable').DataTable();
   });
 </script>
+
 </body>
 
 </html>

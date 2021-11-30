@@ -4,7 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Admin extends CI_Controller {
   function __construct() {
     parent::__construct();
-    $this->load->model('auth'); //Model untuk user
+    $this->load->model('grocery_crud_model'); //Model untuk user
   }
 
   public function index(){
@@ -12,72 +12,30 @@ class Admin extends CI_Controller {
         'title' => 'Booking Facility Website — User Listing'
       ];
   
-      $data['user'] = $this->auth->getAllUser();
+      $this->load->library('grocery_CRUD');
+      $crud = new grocery_CRUD();
+      $crud->set_theme('tablestrap');
+      $crud->set_table('user');
+      $crud->set_subject('User');
+      $crud->columns('Username', 'Email', 'Role'); //Tampilkan semua kecuali password
+      $crud->change_field_type('Password','assword');
+      $crud->edit_fields('Username', 'Email', 'Role');
+
+      //Untuk hash password
+      $crud->callback_before_insert(array($this,'encrypt_password_callback'));
+      $crud->callback_before_update(array($this,'encrypt_password_callback'));
+
+      $output = $crud->render();
+      $data['crud'] = get_object_vars($output);
+      $data['style'] = $this->load->view('include/style', $data, TRUE);
+      $data['script'] = $this->load->view('include/script', $data, TRUE);      
       $data['header'] = $this->load->view("templates/header");
       $data['footer'] = $this->load->view("templates/footer");
       $this->template->load('template/template_home', 'pages/user/UserListing', $data);
   }
 
-  public function deleteUser($id) {
-    $this->auth->deleteUser($id);
-    redirect(site_url("admin"));
-  }
-
-  public function editUser($id) {
-    $data = [
-      'title' => 'Booking Facility Website — Edit User'
-    ];
-      $data['user'] = $this->auth->getOneUser($id);
-      $data['header'] = $this->load->view("templates/header");
-      $data['footer'] = $this->load->view("templates/footer");
-      $this->template->load('template/template_home', 'pages/user/editUser', $data);
-  }
-
-  public function editCheck(){
-    $this->form_validation->set_rules('username', 'username', 'trim|required|min_length[1]|max_length[255]');
-    $this->form_validation->set_rules('email', 'email', 'trim|required|min_length[1]|max_length[255]|valid_email');
-    $userID = $this->input->post('UserID');
-    if ($this->form_validation->run() == true) //Kalau sesuai rules update ke DB
-    {
-      $username = $this->input->post('username');
-      $email = $this->input->post('email');
-      $this->auth->edit($userID, $username, $email);
-      $this->session->set_flashdata('success_edit', 'Proses Pendaftaran User Berhasil');
-      redirect('admin'); //Terus masuk ke admin
-    } else //Kalau ga sesuai balik ke edit page + bawa validation errornya
-    {
-      $this->session->set_flashdata('error', validation_errors());
-      redirect('admin/editUser/'.$userID);
-    }
-  }
-
-  public function addUser(){
-    $data = [
-      'title' => 'Booking Facility Website — Add User'
-    ];
-    $data['header'] = $this->load->view("templates/header");
-    $data['footer'] = $this->load->view("templates/footer");
-    $this->template->load('template/template_home', 'pages/user/addUser', $data);
-  }
-
-  public function addCheck(){
-    $this->form_validation->set_rules('username', 'username', 'trim|required|min_length[1]|max_length[255]|is_unique[user.username]');
-    $this->form_validation->set_rules('email', 'email', 'trim|required|min_length[1]|max_length[255]|valid_email');
-    $this->form_validation->set_rules('password', 'password', 'trim|required|min_length[1]|max_length[255]');
-    $this->form_validation->set_rules('role', 'role', 'trim|required');
-    if ($this->form_validation->run() == true) //Kalau sesuai rules insert ke DB
-    {
-      $username = $this->input->post('username');
-      $email = $this->input->post('email');
-      $password = $this->input->post('password');
-      $role = $this->input->post('role');
-      $this->auth->add($username, $email, $password, $role);
-      $this->session->set_flashdata('success_add', 'Proses Pendaftaran User Berhasil');
-      redirect('admin'); //Terus masuk ke login
-    } else //Kalau ga sesuai balik ke add + bawa validation errornya
-    {
-      $this->session->set_flashdata('error', validation_errors());
-      redirect('admin/addUser');
-    }
+  function encrypt_password_callback($post_array, $primary_key = null){
+    $post_array['Password'] = password_hash($post_array['Password'], PASSWORD_DEFAULT);
+    return $post_array;
   }
 }

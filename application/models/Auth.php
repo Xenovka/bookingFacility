@@ -28,35 +28,4 @@ class Auth extends CI_Model {
       return 0;
     }
   }
-
-  public function getAllUser() {
-    $this->listUser = $this->db->query("SELECT * FROM user");
-    $this->listUser = $this->listUser->result_array();
-    return $this->listUser;
-  }
-
-  public function getOneUser($id) {
-    $this->listUser = $this->db->query("SELECT * FROM user WHERE UserID = $id");
-    $this->listUser = $this->listUser->result_array();
-    return $this->listUser;
-  }
-
-  public function deleteUser($id) {
-    $query = $this->db->query("DELETE FROM user WHERE UserID = '$id'");
-  }
-
-  public function edit($id, $user, $email){
-    $this->db->query("UPDATE user SET Username='$user' WHERE UserID = '$id'");
-    $this->db->query("UPDATE user SET Email='$email' WHERE UserID = '$id'");
-  }
-
-  public function add($username, $email, $password, $role){
-    $data_user = array(
-      'username' => $username,
-      'email' => $email,
-      'password' => password_hash($password, PASSWORD_DEFAULT),
-      'role' => $role
-    );
-    $this->db->insert('User', $data_user);
-  }
 }
