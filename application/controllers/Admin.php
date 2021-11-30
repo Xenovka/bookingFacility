@@ -4,7 +4,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Admin extends CI_Controller {
   function __construct() {
     parent::__construct();
-    $this->load->model('auth');
+    $this->load->model('auth'); //Model untuk user
+    $this->load->model('facility'); //Model untuk facility
   }
 
   public function index(){
@@ -16,6 +17,17 @@ class Admin extends CI_Controller {
       $data['header'] = $this->load->view("templates/header");
       $data['footer'] = $this->load->view("templates/footer");
       $this->template->load('template/template_home', 'pages/UserListing', $data);
+  }
+
+  public function facilities(){
+    $data = [
+      'title' => 'Booking Facility Website — Facility Listing'
+    ];
+
+    $data['facility'] = $this->facility->getAllfacility();
+    $data['header'] = $this->load->view("templates/header");
+    $data['footer'] = $this->load->view("templates/footer");
+    $this->template->load('template/template_home', 'pages/FacilityListing', $data);
   }
 
   public function deleteUser($id) {
