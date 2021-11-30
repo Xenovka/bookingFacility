@@ -15,7 +15,7 @@ class Facilities extends CI_Controller {
     $data['facility'] = $this->facility->getAllfacility();
     $data['header'] = $this->load->view("templates/header");
     $data['footer'] = $this->load->view("templates/footer");
-    $this->template->load('template/template_home', 'pages/FacilityListing', $data);
+    $this->template->load('template/template_home', 'pages/facility/FacilityListing', $data);
   }
 
   public function deleteFacility($id) {
@@ -24,10 +24,13 @@ class Facilities extends CI_Controller {
   }
 
   public function editFacility($id) {
+    $data = [
+      'title' => 'Booking Facility Website — Edit Facility'
+    ];
       $data['facility'] = $this->facility->getOneFacility($id);
       $data['header'] = $this->load->view("templates/header");
       $data['footer'] = $this->load->view("templates/footer");
-      $this->template->load('template/template_home', 'pages/editFacility', $data);
+      $this->template->load('template/template_home', 'pages/facility/editFacility', $data);
   }
 
   public function editCheck(){

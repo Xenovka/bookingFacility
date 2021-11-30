@@ -49,4 +49,14 @@ class Auth extends CI_Model {
     $this->db->query("UPDATE user SET Username='$user' WHERE UserID = '$id'");
     $this->db->query("UPDATE user SET Email='$email' WHERE UserID = '$id'");
   }
+
+  public function add($username, $email, $password, $role){
+    $data_user = array(
+      'username' => $username,
+      'email' => $email,
+      'password' => password_hash($password, PASSWORD_DEFAULT),
+      'role' => $role
+    );
+    $this->db->insert('User', $data_user);
+  }
 }
