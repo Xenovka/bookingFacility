@@ -9,6 +9,29 @@
 				echo '</div>';
 			}
 		?>
+    <?php
+      if($this->session->flashdata('message'))
+      {
+    ?>
+        <div class="alert alert-danger">
+            <?php
+            echo $this->session->flashdata('message');
+            ?>
+        </div>
+    <?php
+    }
+
+    if($this->session->flashdata('success_message'))
+    {
+    ?>
+        <div class="alert alert-success">
+            <?php
+            echo $this->session->flashdata('success_message');
+            ?>
+        </div>
+    <?php
+    }
+    ?>
 
   <form method="post" action="<?php echo base_url('index.php/home/registCheck'); ?>">
     <div class="mb-3">
@@ -23,6 +46,7 @@
       <label for="password" class="form-label">Password</label>
       <input type="password" class="form-control" name="password" id="password" placeholder="Password">
     </div>
+    <div class="g-recaptcha" data-sitekey="6Lf6Cm8dAAAAAGflr6iNKHEh6x27kZ2OScKS7anq"></div>
     <button type="submit" class="btn register__button">Register</button>
   </form>
 
