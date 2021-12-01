@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2021 at 02:07 AM
+-- Generation Time: Dec 01, 2021 at 05:29 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -71,6 +71,30 @@ INSERT INTO `requests` (`RequestID`, `RequesterID`, `ReqFacilityID`, `Date`, `St
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `reserveduser`
+--
+
+CREATE TABLE `reserveduser` (
+  `RequestID` int(11) NOT NULL,
+  `RequesterID` int(11) NOT NULL,
+  `ReqFacilityID` int(11) NOT NULL,
+  `Date` date NOT NULL,
+  `StartTime` time NOT NULL,
+  `EndTime` time NOT NULL,
+  `Status` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `reserveduser`
+--
+
+INSERT INTO `reserveduser` (`RequestID`, `RequesterID`, `ReqFacilityID`, `Date`, `StartTime`, `EndTime`, `Status`) VALUES
+(1, 3, 4, '2021-12-03', '13:29:00', '16:29:00', 'Wait'),
+(2, 1, 3, '2021-12-03', '19:00:00', '21:00:00', 'Wait');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `role`
 --
 
@@ -132,6 +156,14 @@ ALTER TABLE `requests`
   ADD KEY `RequesterID` (`RequesterID`);
 
 --
+-- Indexes for table `reserveduser`
+--
+ALTER TABLE `reserveduser`
+  ADD PRIMARY KEY (`RequestID`),
+  ADD KEY `RequesterID` (`RequesterID`),
+  ADD KEY `ReqFacilityID` (`ReqFacilityID`);
+
+--
 -- Indexes for table `role`
 --
 ALTER TABLE `role`
@@ -161,6 +193,12 @@ ALTER TABLE `requests`
   MODIFY `RequestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `reserveduser`
+--
+ALTER TABLE `reserveduser`
+  MODIFY `RequestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
@@ -176,6 +214,13 @@ ALTER TABLE `user`
 ALTER TABLE `requests`
   ADD CONSTRAINT `requests_ibfk_1` FOREIGN KEY (`ReqFacilityID`) REFERENCES `facility` (`FacilityID`),
   ADD CONSTRAINT `requests_ibfk_2` FOREIGN KEY (`RequesterID`) REFERENCES `user` (`UserID`);
+
+--
+-- Constraints for table `reserveduser`
+--
+ALTER TABLE `reserveduser`
+  ADD CONSTRAINT `reserveduser_ibfk_1` FOREIGN KEY (`RequesterID`) REFERENCES `user` (`UserID`),
+  ADD CONSTRAINT `reserveduser_ibfk_2` FOREIGN KEY (`ReqFacilityID`) REFERENCES `facility` (`FacilityID`);
 
 --
 -- Constraints for table `user`

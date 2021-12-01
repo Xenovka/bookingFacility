@@ -4,7 +4,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Management extends CI_Controller {
   function __construct() {
     parent::__construct();
-    $this->load->model('grocery_crud_model'); //Model untuk user
+    $this->load->model('grocery_crud_model');
+    $this->load->model('manage');
   }
 
   public function index(){
@@ -59,5 +60,17 @@ class Management extends CI_Controller {
     $data['crud'] = get_object_vars($output);
     $data['title'] = 'Booking Facility Website — Request Listing';
     $this->template->load('template/template_navbar', 'pages/RequestListing', $data);
+  }
+
+  public function accept($id){
+        $this->manage->deleteRequest($id);
+        $this->manage->acceptReserved($id);
+        redirect(site_url("management/requests"));
+  }
+
+  public function decline($id){
+    $this->manage->deleteRequest($id);
+    $this->manage->declineReserved($id);
+    redirect(site_url("management/requests"));
 }
 }
