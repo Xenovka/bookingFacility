@@ -8,36 +8,18 @@
   <title><?= $title; ?></title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
+  <link rel="stylesheet" href="<?= base_url(); ?>assets/css/main.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-  <link rel="stylesheet" href="<?= base_url(); ?>assets/css/main.css">
   <?php foreach ($crud['css_files'] as $file): ?>
-      <link type="text/css" rel="stylesheet" href="<?php echo $file; ?>" />
+  <link type="text/css" rel="stylesheet" href="<?php echo $file; ?>" />
   <?php endforeach; ?>
-  <style>
-  * {
-    padding: 0;
-    margin: 0;
-  }
-
-  li.currentPage {
-    background: #ddd;
-    border-radius: 10px;
-    box-sizing: border-box;
-    box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
-  }
-
-  .currentPage a {
-    color: black !important;
-    font-weight: 630;
-  }
-  </style>
 </head>
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <b><a class="navbar-brand" style="color:#05F" href="<?= base_url() ?>">Facility Boooking</a></b>
+      <b><a class="navbar-brand" href="<?= base_url() ?>">Facility Boooking</a></b>
       <button class="navbar-toggler mb-2" type="button" data-bs-toggle="collapse"
         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
         aria-label="Toggle navigation">
@@ -74,14 +56,11 @@
   <script src='https://code.jquery.com/jquery-3.5.1.js'></script>
   <script src='https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js'></script>
   <script src='https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js'></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-  </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
   </script>
   <?php foreach ($crud['js_files'] as $file): ?>
-      <script src="<?php echo $file; ?>"> </script>
+  <script src="<?php echo $file; ?>"> </script>
   <?php endforeach; ?>
   <script>
   function logout() {
