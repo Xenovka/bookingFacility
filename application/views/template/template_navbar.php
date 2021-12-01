@@ -30,32 +30,14 @@
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link rel="stylesheet" href="<?= base_url(); ?>assets/css/main.css">
   <?php foreach ($crud['css_files'] as $file): ?>
-      <link type="text/css" rel="stylesheet" href="<?php echo $file; ?>" />
+  <link type="text/css" rel="stylesheet" href="<?php echo $file; ?>" />
   <?php endforeach; ?>
-  <style>
-  * {
-    padding: 0;
-    margin: 0;
-  }
-
-  li.currentPage {
-    background: #ddd;
-    border-radius: 10px;
-    box-sizing: border-box;
-    box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
-  }
-
-  .currentPage a {
-    color: black !important;
-    font-weight: 630;
-  }
-  </style>
 </head>
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <b><a class="navbar-brand" style="color:#05F" href="<?= base_url() ?>">Facility Boooking</a></b>
+      <b><a class="navbar-brand" href="<?= base_url() ?>">Facility Boooking</a></b>
       <button class="navbar-toggler mb-2" type="button" data-bs-toggle="collapse"
         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
         aria-label="Toggle navigation">
@@ -66,7 +48,7 @@
           <?php
             foreach($navbar[$role] as $key => $value) {
             echo "
-              <li class='nav-item me-2 ";
+              <li class='nav-item navbar__menu-item ";
               if ($this->uri->segment(2, NULL) == $key) echo 'currentPage';
               echo "'>
                 <a class='nav-link' href='$value'>$key</a>
@@ -87,11 +69,11 @@
           </li> -->
       </div>
       <div class='ms-auto' class="collapse navbar-collapse" id="navbarSupportedContent">
-        <select onchange="logout()" class="form-select form-select-lg mt-1" aria-label=".form-select-sm example">
+        <select onchange="logout()" class="form-select form-select-lg" aria-label=".form-select-sm example">
           <option disabled selected hidden value="">Halo,
-            <?php echo (isset($_SESSION["account"])) ? $_SESSION["account"]['Username'] : "login dulu ya..."; ?>
+            <?php echo (isset($_SESSION["account"])) ? $_SESSION["account"]['Username'] : "Please Login!"; ?>
           </option> <!-- controller method tidak ada && status belum login ? -->
-          <option value="logout"><?php echo (isset($_SESSION["account"])) ? "logout" : "login"; ?> </option>
+          <option value="logout"><?php echo (isset($_SESSION["account"])) ? "Log Out" : "Login"; ?> </option>
           <!-- controller method tidak ada && status belum login ? -->
         </select>
       </div>
@@ -109,7 +91,7 @@
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
   </script>
   <?php foreach ($crud['js_files'] as $file): ?>
-      <script src="<?php echo $file; ?>"> </script>
+  <script src="<?php echo $file; ?>"> </script>
   <?php endforeach; ?>
   <script>
   function logout() {

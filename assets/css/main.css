@@ -11,16 +11,33 @@ html {
 }
 
 /* NAVBAR */
-li.currentPage {
-	background: #ddd;
-	border-radius: 10px;
-	box-sizing: border-box;
-	box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.3);
+.navbar {
+	padding: 0;
 }
 
-.currentPage a {
-	color: black !important;
-	font-weight: 630;
+.navbar__menu-item {
+	text-transform: capitalize;
+}
+
+.navbar-nav {
+	height: 100%;
+}
+
+.nav-item a:hover {
+	text-decoration: none;
+	background-color: #ccc;
+	color: #242424;
+}
+
+.nav-link {
+	padding-right: 20px !important;
+	padding-left: 20px !important;
+}
+
+.currentPage {
+	color: #242424;
+	font-weight: 600;
+	background-color: #ccc;
 }
 
 /* HOME PAGE */
