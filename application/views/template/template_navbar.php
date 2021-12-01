@@ -55,15 +55,17 @@
           <li class="nav-item me-2 <?php if ($this->uri->segment(2, NULL) == 'requests') echo 'currentPage' ?>">
             <a class="nav-link" href="<?= site_url("admin/requests") ?>">Requests</a>
           </li>
-          <li class="nav-item">
-            <select onchange="logout()" class="form-select form-select-sm mt-1" aria-label=".form-select-sm example">
-              <option disabled selected hidden value="">Halo,
-                <?php echo (isset($_SESSION["accountFullName"])) ? $_SESSION["accountFullName"] : "login dulu ya..."; ?>
-              </option> <!-- controller method tidak ada && status belum login ? -->
-              <option value="logout"><?php echo (isset($_SESSION["accountFullName"])) ? "logout" : "login"; ?> </option>
-              <!-- controller method tidak ada && status belum login ? -->
-            </select>
+          <li class="nav-item ms-auto">
           </li>
+      </div>
+      <div class='ms-auto' class="collapse navbar-collapse" id="navbarSupportedContent">
+        <select onchange="logout()" class="form-select form-select-sm mt-1" aria-label=".form-select-sm example">
+          <option disabled selected hidden value="">Halo,
+            <?php echo (isset($_SESSION["accountFullName"])) ? $_SESSION["accountFullName"] : "login dulu ya..."; ?>
+          </option> <!-- controller method tidak ada && status belum login ? -->
+          <option value="logout"><?php echo (isset($_SESSION["accountFullName"])) ? "logout" : "login"; ?> </option>
+          <!-- controller method tidak ada && status belum login ? -->
+        </select>
       </div>
     </div>
   </nav>
