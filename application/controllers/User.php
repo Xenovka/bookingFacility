@@ -20,7 +20,7 @@ class User extends CI_Controller {
     $output = $crud->render();
     $data['title'] = 'Booking Facility Website — Facility Listing';
     $data['crud'] = get_object_vars($output);
-    $this->template->load('template/template_navbar', 'pages/UserFacilityList', $data);
+    $this->template->load('template/template_navbar_user', 'pages/UserFacilityList', $data);
   }
 
   public function reserved(){
@@ -35,8 +35,12 @@ class User extends CI_Controller {
     $crud->set_relation('ReqFacilityID','facility','FacilityName');
     $crud->display_as('ReqFacilityID','Requested Facility');
     $crud->callback_add_field('RequesterID',array($this, 'insert_requester'));//Masukkin UserID nya gimana ya? wkwk
-    $crud->callback_add_field('Status',array($this, 'insert_status'));//Masukkin UserID nya gimana ya? wkwk
-    // $crud->callback_before_insert(array($this,'insert_status'));
+    $crud->callback_add_field('Status',array($this, 'insert_status'));
+    // $crud->callback_before_insert(array($this,'clone'));
+    // $crud->callback_before_update(array($this, 'clone'));
+    // $crud->callback_before_delete(array($this, 'clone'));
+    // $crud->callback_before_upload(array($this, 'clone'));
+    // $crud->callback_before_clone(array($this, 'clone'));
     $crud->unset_edit();
     $crud->unset_delete();
     $crud->unset_print();
@@ -46,7 +50,7 @@ class User extends CI_Controller {
     $output = $crud->render();
     $data['crud'] = get_object_vars($output);
     $data['title'] = 'Booking Facility Website — Request Listing';
-    $this->template->load('template/template_navbar', 'pages/RequestListing', $data);
+    $this->template->load('template/template_navbar_user', 'pages/RequestListing', $data);
   }
 
   public function insert_requester($value, $primary_key){
@@ -58,4 +62,10 @@ class User extends CI_Controller {
     return '<input type="text" maxlength="50" value="Wait" name="Status" style="width:462px" disabled>
     <input type="text" maxlength="50" value="Wait" name="Status" style="width:462px" hidden>';
   }
+
+  // public function clone($post_array, $primary_key){
+  //   $post_array['Status']='Accept';
+      
+  //   return $post_array;
+  // }
 }
