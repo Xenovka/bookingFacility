@@ -26,19 +26,6 @@ class Home extends CI_Controller {
     $this->form_validation->set_rules('username', 'username', 'trim|required|min_length[1]|max_length[255]|is_unique[user.username]');
     $this->form_validation->set_rules('email', 'email', 'trim|required|min_length[1]|max_length[255]|valid_email');
     $this->form_validation->set_rules('password', 'password', 'trim|required|min_length[1]|max_length[255]');
-<<<<<<< Updated upstream
-    if ($this->form_validation->run() == true) //Kalau sesuai rules insert ke DB
-    {
-      $username = $this->input->post('username');
-      $email = $this->input->post('email');
-      $password = $this->input->post('password');
-      $this->auth->register($username, $email, $password);
-      $this->session->set_flashdata('success_register', 'Proses Pendaftaran User Berhasil');
-      redirect('home/login'); //Terus masuk ke login
-    } else //Kalau ga sesuai balik ke register + bawa validation errornya
-    {
-      $this->session->set_flashdata('error', validation_errors());
-=======
     
     $recaptchaResponse = trim($this->input->post('g-recaptcha-response'));
     if($recaptchaResponse != '')
@@ -78,7 +65,6 @@ class Home extends CI_Controller {
       }
     }else{
       $this->session->set_flashdata('fail_captcha', 'Sorry Google Recaptcha Unsuccessful!!');
->>>>>>> Stashed changes
       redirect('home/register');
     }
   }
