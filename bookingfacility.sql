@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 30, 2021 at 02:25 PM
+-- Generation Time: Dec 01, 2021 at 02:07 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -99,18 +99,19 @@ CREATE TABLE `user` (
   `Username` varchar(255) NOT NULL,
   `Email` varchar(255) NOT NULL,
   `Password` varchar(255) NOT NULL,
-  `Role` int(11) NOT NULL
+  `Role` int(11) NOT NULL,
+  `Image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`UserID`, `Username`, `Email`, `Password`, `Role`) VALUES
-(1, 'agung123', 'agung@umn.ac.id', '$2y$10$2UCelXL./iuwRY0Nv6NuPuJcnBy/nfsSOrnsGJaI1./baKzz2OPNe', 1),
-(3, 'Vallencius', 'vallencius.siswanto@student.umn.ac.id', '$2y$10$CRUpdchAR9sLJa8AUczWEu2TjnV4SUtxcjMIoqVPaIdfc09R5gFaa', 1),
-(4, 'Vallencius111', 'admin@umn.ac.id', '$2y$10$TFqJB.YMtoZr.TwIovywduvkaeHHe5nc1nn5coypaJub6ljfoEjZq', 2),
-(6, 'CobaCoba', 'vallencius1901@gmail.com', '$2y$10$Ca847wTzkmk20pItyT0mUOwrdxYEsXwtn74A.v6CzF5PmxNX//qki', 3);
+INSERT INTO `user` (`UserID`, `Username`, `Email`, `Password`, `Role`, `Image`) VALUES
+(1, 'agung123', 'agung@umn.ac.id', '$2y$10$2UCelXL./iuwRY0Nv6NuPuJcnBy/nfsSOrnsGJaI1./baKzz2OPNe', 1, ''),
+(3, 'Vallencius', 'vallencius.siswanto@student.umn.ac.id', '$2y$10$CRUpdchAR9sLJa8AUczWEu2TjnV4SUtxcjMIoqVPaIdfc09R5gFaa', 1, 'ceef7-fotovallen.jpg'),
+(4, 'Vallencius111', 'admin@umn.ac.id', '$2y$10$TFqJB.YMtoZr.TwIovywduvkaeHHe5nc1nn5coypaJub6ljfoEjZq', 2, ''),
+(6, 'CobaCoba', 'vallencius1901@gmail.com', '$2y$10$Ca847wTzkmk20pItyT0mUOwrdxYEsXwtn74A.v6CzF5PmxNX//qki', 3, '');
 
 --
 -- Indexes for dumped tables
