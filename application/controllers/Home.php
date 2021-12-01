@@ -15,6 +15,12 @@ class Home extends CI_Controller {
     $this->template->load('template/template_home', 'home', $data);
   }
 
+  public function logout() {
+    session_unset();
+    session_destroy();
+    redirect("Home");
+  }
+
   //Buka view register
   public function register() {
     $data['title'] = 'Booking Facility Website — Register';

@@ -37,7 +37,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <b><a class="navbar-brand" style="color:#05F" href="<?= site_url("home/dashboard") ?>">Facility Boooking</a></b>
+      <b><a class="navbar-brand" style="color:#05F" href="<?= base_url() ?>">Facility Boooking</a></b>
       <button class="navbar-toggler mb-2" type="button" data-bs-toggle="collapse"
         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
         aria-label="Toggle navigation">
@@ -59,7 +59,7 @@
           </li>
       </div>
       <div class='ms-auto' class="collapse navbar-collapse" id="navbarSupportedContent">
-        <select onchange="logout()" class="form-select form-select-sm mt-1" aria-label=".form-select-sm example">
+        <select onchange="logout()" class="form-select form-select-lg mt-1" aria-label=".form-select-sm example">
           <option disabled selected hidden value="">Halo,
             <?php echo (isset($_SESSION["accountFullName"])) ? $_SESSION["accountFullName"] : "login dulu ya..."; ?>
           </option> <!-- controller method tidak ada && status belum login ? -->
