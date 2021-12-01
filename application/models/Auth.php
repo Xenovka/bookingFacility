@@ -32,4 +32,33 @@ class Auth extends CI_Model {
       return 0;
     }
   }
+
+  public function validateAdminRole() {
+    if(!isset($_SESSION['account']) || $_SESSION['account']['Role'] != '1') {
+      redirect(base_url());
+    }
+  }
+  
+  public function validateManagementRole() {
+    if(!isset($_SESSION['account']) || $_SESSION['account']['Role'] != '2') {
+      redirect(base_url());
+    }
+  }
+
+  public function validateUserRole() {
+    if(!isset($_SESSION['account']) || $_SESSION['account']['Role'] != '3') {
+      redirect(base_url());
+    }
+  }
+
+  public function checkPermission($val = -1) {
+    switch($val) {
+      case 1:
+        return "admin";
+      case 2:
+        return "management";
+      case 3:
+        return "user";
+    }
+  }
 }

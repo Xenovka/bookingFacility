@@ -5,6 +5,8 @@ class Admin extends CI_Controller {
   function __construct() {
     parent::__construct();
     $this->load->model('grocery_crud_model'); //Model untuk user
+    $this->load->model('Auth');
+    $this->Auth->validateAdminRole();
   }
 
   public function index(){
@@ -12,6 +14,7 @@ class Admin extends CI_Controller {
   }
 
   public function user(){
+      $data['role'] = "admin";
       $this->load->library('grocery_CRUD');
       $crud = new grocery_CRUD();
       $crud->set_theme('tablestrap');
@@ -43,6 +46,7 @@ class Admin extends CI_Controller {
   }
 
   public function facilities(){
+      $data['role'] = "admin";
     $this->load->library('grocery_CRUD');
     $crud = new grocery_CRUD();
     $crud->set_theme('tablestrap');
@@ -66,6 +70,7 @@ class Admin extends CI_Controller {
   }
 
   public function requests(){  
+      $data['role'] = "admin";
     $this->load->library('grocery_CRUD');
     $crud = new grocery_CRUD();
     $crud->set_theme('tablestrap');

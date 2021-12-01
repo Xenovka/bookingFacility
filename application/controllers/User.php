@@ -6,6 +6,7 @@ class User extends CI_Controller {
     parent::__construct();
     $this->load->model('grocery_crud_model');
     $this->load->model('manage');
+    $this->load->model('Auth');
   }
 
   public function index(){
@@ -13,6 +14,8 @@ class User extends CI_Controller {
   }
 
   public function facilities(){
+    $this->Auth->validateUserRole();
+    $data['role'] = 'user';
     $this->load->library('grocery_CRUD');
     $crud = new grocery_CRUD();
     $crud->set_table('facility');
@@ -20,10 +23,12 @@ class User extends CI_Controller {
     $output = $crud->render();
     $data['title'] = 'Booking Facility Website — Facility Listing';
     $data['crud'] = get_object_vars($output);
-    $this->template->load('template/template_navbar_user', 'pages/UserFacilityList', $data);
+    $this->template->load('template/template_navbar', 'pages/UserFacilityList', $data);
   }
 
-  public function reserved(){
+  public function requests(){
+    $this->Auth->validateUserRole();
+    $data['role'] = 'user';
     $this->load->library('grocery_CRUD');
     $crud = new grocery_CRUD();
     $crud->set_theme('tablestrap');
@@ -50,7 +55,7 @@ class User extends CI_Controller {
     $output = $crud->render();
     $data['crud'] = get_object_vars($output);
     $data['title'] = 'Booking Facility Website — Request Listing';
-    $this->template->load('template/template_navbar_user', 'pages/RequestListing', $data);
+    $this->template->load('template/template_navbar', 'pages/RequestListing', $data);
   }
 
   public function insert_requester($value, $primary_key){

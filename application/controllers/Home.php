@@ -77,6 +77,9 @@ class Home extends CI_Controller {
 
   //Menampilkan view login
   public function login() {
+    if(isset($_SESSION['account'])) {
+      redirect("{$this->auth->checkPermission($_SESSION['account']['Role'])}");
+    }
     $data['title'] = 'Booking Facility Website — Login';
 
     $loginStatus = 0;
@@ -86,11 +89,14 @@ class Home extends CI_Controller {
       $loginStatus = $this->auth->login($this->input->post('email'), $this->input->post('password'));
     }
 
-
     if (!$this->form_validation->run() || !$loginStatus) {
       $this->template->load('template/template_home', 'pages/login', $data); //login gagal
-    } else {
+    } else if($_SESSION['account']['Role'] == 1) {
       redirect("admin");
+    } else if($_SESSION['account']['Role'] == 2) {
+      redirect("management");
+    } else if($_SESSION['account']['Role'] == 3) {
+      redirect("user");
     }
   }
 }
