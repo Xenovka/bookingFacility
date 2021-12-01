@@ -46,13 +46,13 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li
-            class="nav-item me-2 <?php if ($this->uri->segment(3, NULL) == NULL || $this->uri->segment(3, NULL) == 'users') echo 'currentPage' ?>">
+            class="nav-item me-2 <?php if ($this->uri->segment(2, NULL) == NULL || $this->uri->segment(2, NULL) == 'user') echo 'currentPage' ?>">
             <a class="nav-link" href="<?= site_url("admin") ?>">Users</a>
           </li>
-          <li class="nav-item me-2 <?php if ($this->uri->segment(3, NULL) == 'facilities') echo 'currentPage' ?>">
+          <li class="nav-item me-2 <?php if ($this->uri->segment(2, NULL) == 'facilities') echo 'currentPage' ?>">
             <a class="nav-link" href="<?= site_url("admin/facilities") ?>">Facilities</a>
           </li>
-          <li class="nav-item me-2 <?php if ($this->uri->segment(3, NULL) == 'requests') echo 'currentPage' ?>">
+          <li class="nav-item me-2 <?php if ($this->uri->segment(2, NULL) == 'requests') echo 'currentPage' ?>">
             <a class="nav-link" href="<?= site_url("admin/requests") ?>">Requests</a>
           </li>
           <li class="nav-item">
