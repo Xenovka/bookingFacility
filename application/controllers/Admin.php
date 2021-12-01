@@ -26,7 +26,7 @@ class Admin extends CI_Controller {
       $output = $crud->render();
       $data['crud'] = get_object_vars($output);
       $data['title'] = 'Booking Facility Website — User Listing';
-      $this->template->load('template/template_home', 'pages/UserListing', $data);
+      $this->template->load('template/template_navbar', 'pages/UserListing', $data);
   }
 
   function encrypt_password_callback($post_array, $primary_key = null){

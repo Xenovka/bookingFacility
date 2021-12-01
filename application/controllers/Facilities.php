@@ -23,6 +23,6 @@ class Facilities extends CI_Controller {
     $output = $crud->render();
     $data['title'] = 'Booking Facility Website — Facility Listing';
     $data['crud'] = get_object_vars($output);
-    $this->template->load('template/template_home', 'pages/FacilityListing', $data);
+    $this->template->load('template/template_navbar', 'pages/FacilityListing', $data);
   }
 }

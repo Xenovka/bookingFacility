@@ -23,6 +23,6 @@ class Requests extends CI_Controller {
       $output = $crud->render();
       $data['crud'] = get_object_vars($output);
       $data['title'] = 'Booking Facility Website — Request Listing';
-      $this->template->load('template/template_home', 'pages/RequestListing', $data);
+      $this->template->load('template/template_navbar', 'pages/RequestListing', $data);
   }
 }
