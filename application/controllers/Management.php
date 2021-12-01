@@ -1,45 +1,14 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Admin extends CI_Controller {
+class Management extends CI_Controller {
   function __construct() {
     parent::__construct();
     $this->load->model('grocery_crud_model'); //Model untuk user
   }
 
   public function index(){
-    redirect('admin/user');
-  }
-
-  public function user(){
-      $this->load->library('grocery_CRUD');
-      $crud = new grocery_CRUD();
-      $crud->set_theme('tablestrap');
-      $crud->set_table('user');
-      $crud->set_subject('User');
-      $crud->columns('UserID','Username', 'Email', 'Role'); //Tampilkan semua kecuali password
-      $crud->change_field_type('Password','password');
-      $crud->edit_fields('Username', 'Email', 'Role');
-      $crud->add_fields('Username', 'Email', 'Password', 'Role');
-      $crud->set_relation('Role','role','RoleName');
-      $crud->unset_print();
-      $crud->unset_export();
-      $crud->unset_read();
-      $crud->unset_clone();
-
-      //Untuk hash password
-      $crud->callback_before_insert(array($this,'encrypt_password_callback'));
-      $crud->callback_before_update(array($this,'encrypt_password_callback'));
-
-      $output = $crud->render();
-      $data['crud'] = get_object_vars($output);
-      $data['title'] = 'Booking Facility Website — User Listing';
-      $this->template->load('template/template_navbar', 'pages/UserListing', $data);
-  }
-
-  function encrypt_password_callback($post_array, $primary_key = null){
-    $post_array['Password'] = password_hash($post_array['Password'], PASSWORD_DEFAULT);
-    return $post_array;
+    redirect('management/facilities');
   }
 
   public function facilities(){
@@ -77,9 +46,14 @@ class Admin extends CI_Controller {
     $crud->set_relation('ReqFacilityID','facility','FacilityName');
     $crud->unset_add();
     $crud->unset_edit();
+    $crud->unset_delete();
     $crud->unset_print();
     $crud->unset_export();
     $crud->unset_read();
+
+    //Tambah custom action
+    $crud->add_action('Accept', '', 'management/accept'); 
+    $crud->add_action('Decline', '', 'management/decline'); //tambahin 1 argument lagi buat class
 
     $output = $crud->render();
     $data['crud'] = get_object_vars($output);
