@@ -1,4 +1,27 @@
 <div class="container login__wrapper">
+<?php
+      if($this->session->flashdata('message'))
+      {
+    ?>
+        <div class="alert alert-danger">
+            <?php
+            echo $this->session->flashdata('message');
+            ?>
+        </div>
+    <?php
+    }
+
+    if($this->session->flashdata('success_message'))
+    {
+    ?>
+        <div class="alert alert-success">
+            <?php
+            echo $this->session->flashdata('success_message');
+            ?>
+        </div>
+    <?php
+    }
+    ?>
   <h1 class="text-center mb-5 login__main-title">Login Here</h1>
   <form action="<?= site_url("/home/login") ?>" method="POST">
     <div class="mb-3">
@@ -19,7 +42,7 @@
         unset($_SESSION['error']);
       }
     ?>
-
+    <div class="g-recaptcha" data-sitekey="6Lf6Cm8dAAAAAGflr6iNKHEh6x27kZ2OScKS7anq"></div>
     <button class="btn login__button" type="submit">Submit</button>
   </form>
 
