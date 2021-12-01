@@ -16,9 +16,13 @@ class Auth extends CI_Model {
   public function login($email, $password) {
     if ($query = $this->db->get_where('user', ['email' => $email])) {
       $query = $query->result_array();
-      if (!$query) return 0;
+      if (!$query) {
+        $_SESSION['error'] = "Data yang anda masukkan salah!";
+        return 0;
+      }
       $query = $query[0];
     }
+
 
     if (password_verify($password, $query['Password']) && $query['Email'] == $email) {
       $_SESSION['account'] = $query;
