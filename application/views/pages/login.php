@@ -5,13 +5,13 @@
       <label class="form-label" for="email">Email</label>
       <input class="form-control" id='email' type="email" name="email" placeholder="Input Email">
     </div>
-    <p class="alert alert-danger"><?= form_error('email') ?></p>
+    <?= form_error('email', "<p class='alert alert-danger'>", "</p>") ?>
 
     <div class="mb-3">
       <label class="form-label" for="password">Password</label>
       <input class="form-control" id='password' type="password" name="password" placeholder="Input Password ">
     </div>
-    <p class="alert alert-danger"><?= form_error('password') ?></p>
+    <?= form_error('password', "<p class='alert alert-danger'>", "</p>") ?>
 
     <?php
       if (isset($_SESSION['error'])) {

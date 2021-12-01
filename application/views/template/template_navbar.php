@@ -43,9 +43,9 @@
       <div class='ms-auto' class="collapse navbar-collapse" id="navbarSupportedContent">
         <select onchange="logout()" class="form-select form-select-lg mt-1" aria-label=".form-select-sm example">
           <option disabled selected hidden value="">Halo,
-            <?php echo (isset($_SESSION["accountFullName"])) ? $_SESSION["accountFullName"] : "login dulu ya..."; ?>
+            <?php echo (isset($_SESSION["account"])) ? $_SESSION["account"]['Username'] : "login dulu ya..."; ?>
           </option> <!-- controller method tidak ada && status belum login ? -->
-          <option value="logout"><?php echo (isset($_SESSION["accountFullName"])) ? "logout" : "login"; ?> </option>
+          <option value="logout"><?php echo (isset($_SESSION["account"])) ? "logout" : "login"; ?> </option>
           <!-- controller method tidak ada && status belum login ? -->
         </select>
       </div>

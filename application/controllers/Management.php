@@ -32,7 +32,7 @@ class Management extends CI_Controller {
     $output = $crud->render();
     $data['title'] = 'Booking Facility Website — Facility Listing';
     $data['crud'] = get_object_vars($output);
-    $this->template->load('template/template_navbar', 'pages/FacilityListing', $data);
+    $this->template->load('template/template_navbar_management', 'pages/FacilityListing', $data);
   }
 
   public function requests(){  
@@ -59,7 +59,7 @@ class Management extends CI_Controller {
     $output = $crud->render();
     $data['crud'] = get_object_vars($output);
     $data['title'] = 'Booking Facility Website — Request Listing';
-    $this->template->load('template/template_navbar', 'pages/RequestListing', $data);
+    $this->template->load('template/template_navbar_management', 'pages/RequestListing', $data);
   }
 
   public function accept($id){
