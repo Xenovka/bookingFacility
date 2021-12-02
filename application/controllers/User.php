@@ -7,6 +7,7 @@ class User extends CI_Controller {
     $this->load->model('grocery_crud_model');
     $this->load->model('manage');
     $this->load->model('Auth');
+    $this->load->helper('cookie');
   }
 
   public function index(){
@@ -27,10 +28,25 @@ class User extends CI_Controller {
   }
 
   public function requests(){
+    if(isset($_SESSION['after_insert'])) {      
+      $config = [
+        "Date" => implode("-", array_reverse(explode("/", $_SESSION['after_insert']['Date']))),
+        "RequestID" => null,
+        "RequesterID" => $_SESSION['after_insert']['RequesterID'],
+        "ReqFacilityID" => $_SESSION['after_insert']['ReqFacilityID'],
+        "StartTime" => $_SESSION['after_insert']['StartTime'],
+        "EndTime" => $_SESSION['after_insert']['EndTime']
+      ];
+
+      $this->db->insert("requests", $config);
+
+      unset($_SESSION['after_insert']);
+    }
     $this->Auth->validateUserRole();
     $data['role'] = 'user';
     $this->load->library('grocery_CRUD');
     $crud = new grocery_CRUD();
+    $crud->where(['reserveduser.RequesterID' => $_SESSION['account']['UserID']]);
     $crud->set_theme('tablestrap');
     $crud->set_table('reserveduser');
     $crud->set_subject('Request');
@@ -41,6 +57,7 @@ class User extends CI_Controller {
     $crud->display_as('ReqFacilityID','Requested Facility');
     $crud->callback_add_field('RequesterID',array($this, 'insert_requester'));//Masukkin UserID nya gimana ya? wkwk
     $crud->callback_add_field('Status',array($this, 'insert_status'));
+    $crud->callback_after_insert(array($this, 'duplicate_to_requests'));
     // $crud->callback_before_insert(array($this,'clone'));
     // $crud->callback_before_update(array($this, 'clone'));
     // $crud->callback_before_delete(array($this, 'clone'));
@@ -59,13 +76,17 @@ class User extends CI_Controller {
   }
 
   public function insert_requester($value, $primary_key){
-    return '<input type="text" maxlength="50" value="1" name="RequesterID" style="width:462px" disabled>
-    <input type="text" maxlength="50" value="1" name="RequesterID" style="width:462px" hidden>';
+    return '<input type="text" maxlength="50" value="'.$_SESSION['account']['UserID'].'" name="RequesterID" style="width:462px" disabled>
+    <input type="text" maxlength="50" value="'.$_SESSION['account']['UserID'].'" name="RequesterID" style="width:462px" hidden>';
   }
 
   public function insert_status($value, $primary_key){
-    return '<input type="text" maxlength="50" value="Wait" name="Status" style="width:462px" disabled>
-    <input type="text" maxlength="50" value="Wait" name="Status" style="width:462px" hidden>';
+    return '<input type="text" maxlength="50" value="Waiting For Approval" name="Status" style="width:462px" disabled>
+    <input type="text" maxlength="50" value="Waiting For Approval" name="Status" style="width:462px" hidden>';
+  }
+
+  public function duplicate_to_requests($post_array, $primary_key) {
+    $_SESSION['after_insert'] = $post_array;
   }
 
   // public function clone($post_array, $primary_key){
