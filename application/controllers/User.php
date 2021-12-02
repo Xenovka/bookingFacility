@@ -24,6 +24,7 @@ class User extends CI_Controller {
     $output = $crud->render();
     $data['title'] = 'Booking Facility Website — Facility Listing';
     $data['crud'] = get_object_vars($output);
+    $data['facility'] = $this->manage->printAllFacility();
     $this->template->load('template/template_navbar', 'pages/UserFacilityList', $data);
   }
 
@@ -89,9 +90,17 @@ class User extends CI_Controller {
     $_SESSION['after_insert'] = $post_array;
   }
 
-  // public function clone($post_array, $primary_key){
-  //   $post_array['Status']='Accept';
-      
-  //   return $post_array;
-  // }
+  public function facilityDetail($id){
+    $this->Auth->validateUserRole();
+    $data['role'] = 'user';
+    $this->load->library('grocery_CRUD');
+    $crud = new grocery_CRUD();
+    $crud->set_table('facility');
+
+    $output = $crud->render();
+    $data['title'] = 'Booking Facility Website — Facility Datail';
+    $data['crud'] = get_object_vars($output);
+    $data['facility'] = $this->manage->printOneFacility($id);
+    $this->template->load('template/template_navbar', 'pages/FacilityDetail', $data);
+  }
 }
