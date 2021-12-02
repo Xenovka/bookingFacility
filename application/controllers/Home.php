@@ -32,54 +32,56 @@ class Home extends CI_Controller {
     $this->form_validation->set_rules('username', 'username', 'trim|required|min_length[1]|max_length[255]|is_unique[user.username]');
     $this->form_validation->set_rules('email', 'email', 'trim|required|min_length[1]|max_length[255]|valid_email');
     $this->form_validation->set_rules('password', 'password', 'trim|required|min_length[1]|max_length[255]');
-    
-    $captcha_response = trim($this->input->post('g-recaptcha-response'));
+    if ($this->form_validation->run() == true) //Kalau sesuai rules insert ke DB
+    {
+      $username = $this->input->post('username');
+      $email = $this->input->post('email');
+      $password = $this->input->post('password');
+      $captcha_response = trim($this->input->post('g-recaptcha-response'));
 
-		if($captcha_response != '')
-		{
-			$keySecret = '6Lf6Cm8dAAAAAM3xM1v2kY9ichIo9tsyTMW9tsuw';
+      if($captcha_response != '')
+      {
+        $keySecret = '6Lf6Cm8dAAAAAM3xM1v2kY9ichIo9tsyTMW9tsuw';
 
-			$check = array(
-				'secret'		=>	$keySecret,
-				'response'		=>	$this->input->post('g-recaptcha-response')
-			);
+        $check = array(
+          'secret'		=>	$keySecret,
+          'response'		=>	$this->input->post('g-recaptcha-response')
+        );
 
-			$startProcess = curl_init();
+        $startProcess = curl_init();
 
-			curl_setopt($startProcess, CURLOPT_URL, "https://www.google.com/recaptcha/api/siteverify");
+        curl_setopt($startProcess, CURLOPT_URL, "https://www.google.com/recaptcha/api/siteverify");
 
-			curl_setopt($startProcess, CURLOPT_POST, true);
+        curl_setopt($startProcess, CURLOPT_POST, true);
 
-			curl_setopt($startProcess, CURLOPT_POSTFIELDS, http_build_query($check));
+        curl_setopt($startProcess, CURLOPT_POSTFIELDS, http_build_query($check));
 
-			curl_setopt($startProcess, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($startProcess, CURLOPT_SSL_VERIFYPEER, false);
 
-			curl_setopt($startProcess, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($startProcess, CURLOPT_RETURNTRANSFER, true);
 
-			$receiveData = curl_exec($startProcess);
-      $finalResponse['success'];
-			$finalResponse = json_decode($receiveData, true);
-      if($finalResponse['success']) {
-        if ($this->form_validation->run() == true) //Kalau sesuai rules insert ke DB
+        $receiveData = curl_exec($startProcess);
+
+        $finalResponse = json_decode($receiveData, true);
+
+        if($finalResponse['success'])
         {
-          $username = $this->input->post('username');
-          $email = $this->input->post('email');
-          $password = $this->input->post('password');
           $this->auth->register($username, $email, $password);
           $this->session->set_flashdata('success_register', 'Proses Pendaftaran User Berhasil');
-          $this->session->set_flashdata('success_message', 'Data Stored Successfully');
           redirect('home/login'); //Terus masuk ke login;
-        } else //Kalau ga sesuai balik ke register + bawa validation errornya
+        } else
         {
-          $this->session->set_flashdata('error', validation_errors());
+          $this->session->set_flashdata('errorCaptchaR', 'Validation Fail Try Again');
           redirect('home/register');
         }
-      }else{
-          $this->session->set_flashdata('message', 'Validation Fail Try Again');
-          redirect('home/register');
+      } else
+      {
+        $this->session->set_flashdata('errorCaptchaR', 'Validation Fail Try Again');
+        redirect('home/register');
       }
-    }else{
-      $this->session->set_flashdata('message', 'Validation Fail Try Again');
+    } else //Kalau ga sesuai balik ke register + bawa validation errornya
+    {
+      $this->session->set_flashdata('error', validation_errors());
       redirect('home/register');
     }
   }
@@ -93,36 +95,47 @@ class Home extends CI_Controller {
 
     $loginStatus = 0;
     $this->form_validation->set_rules('email', 'Email', "valid_email");
-    
-    $captcha_response = trim($this->input->post('g-recaptcha-response'));
-
-		if($captcha_response != '')
-		{
-			$keySecret = '6Lf6Cm8dAAAAAM3xM1v2kY9ichIo9tsyTMW9tsuw';
-
-			$check = array(
-				'secret'		=>	$keySecret,
-				'response'		=>	$this->input->post('g-recaptcha-response')
-			);
-
-			$startProcess = curl_init();
-
-			curl_setopt($startProcess, CURLOPT_URL, "https://www.google.com/recaptcha/api/siteverify");
-
-			curl_setopt($startProcess, CURLOPT_POST, true);
-
-			curl_setopt($startProcess, CURLOPT_POSTFIELDS, http_build_query($check));
-
-			curl_setopt($startProcess, CURLOPT_SSL_VERIFYPEER, false);
-
-			curl_setopt($startProcess, CURLOPT_RETURNTRANSFER, true);
-
-			$receiveData = curl_exec($startProcess);
-
-			$finalResponse = json_decode($receiveData, true);
-      if($finalResponse['success']) {
         if ($this->input->post('email') != null && $this->input->post('password') != NULL) {
-          $loginStatus = $this->auth->login($this->input->post('email'), $this->input->post('password'));
+          $captcha_response = trim($this->input->post('g-recaptcha-response'));
+
+          if($captcha_response != '')
+          {
+            $keySecret = '6Lf6Cm8dAAAAAM3xM1v2kY9ichIo9tsyTMW9tsuw';
+
+            $check = array(
+              'secret'		=>	$keySecret,
+              'response'		=>	$this->input->post('g-recaptcha-response')
+            );
+
+            $startProcess = curl_init();
+
+            curl_setopt($startProcess, CURLOPT_URL, "https://www.google.com/recaptcha/api/siteverify");
+
+            curl_setopt($startProcess, CURLOPT_POST, true);
+
+            curl_setopt($startProcess, CURLOPT_POSTFIELDS, http_build_query($check));
+
+            curl_setopt($startProcess, CURLOPT_SSL_VERIFYPEER, false);
+
+            curl_setopt($startProcess, CURLOPT_RETURNTRANSFER, true);
+
+            $receiveData = curl_exec($startProcess);
+
+            $finalResponse = json_decode($receiveData, true);
+
+            if($finalResponse['success'])
+            {
+            $loginStatus = $this->auth->login($this->input->post('email'), $this->input->post('password'));
+            } else
+            {
+              $this->session->set_flashdata('errorCaptchaL', 'Validation Fail Try Again');
+              redirect('home/login');
+            }
+          } else
+          {
+            $this->session->set_flashdata('errorCaptchaL', 'Validation Fail Try Again');
+            redirect('home/login');
+          }
         }
 
         if (!$this->form_validation->run() || !$loginStatus) {
@@ -134,13 +147,5 @@ class Home extends CI_Controller {
         } else if($_SESSION['account']['Role'] == 3) {
           redirect("user");
         }
-      }else{
-        $this->session->set_flashdata('message', 'Validation Fail Try Again');
-        redirect('home/login');
-    }
-    }else{
-    $this->session->set_flashdata('message', 'Validation Fail Try Again');
-    redirect('home/login');
-    }
   }
 }

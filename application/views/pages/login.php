@@ -1,28 +1,14 @@
+<script src='https://www.google.com/recaptcha/api.js'></script>
 <div class="container login__wrapper">
-<?php
-      if($this->session->flashdata('message'))
-      {
-    ?>
-        <div class="alert alert-danger">
-            <?php
-            echo $this->session->flashdata('message');
-            ?>
-        </div>
-    <?php
-    }
-
-    if($this->session->flashdata('success_message'))
-    {
-    ?>
-        <div class="alert alert-success">
-            <?php
-            echo $this->session->flashdata('success_message');
-            ?>
-        </div>
-    <?php
-    }
-    ?>
   <h1 class="text-center mb-5 login__main-title">Login Here</h1>
+  <?php 
+			if($this->session->flashdata('errorCaptchaL') !='')
+			{
+				echo '<div class="alert alert-danger" role="alert">';
+				echo $this->session->flashdata('errorCaptchaL');
+				echo '</div>';
+			}
+		?>
   <form action="<?= site_url("/home/login") ?>" method="POST">
     <div class="mb-3">
       <label class="form-label" for="email">Email</label>

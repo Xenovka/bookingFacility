@@ -1,3 +1,4 @@
+<script src='https://www.google.com/recaptcha/api.js'></script>
 <div class="container register__wrapper">
   <h1 class="text-center mb-5 register__main-title">Register Here</h1>
 
@@ -9,31 +10,16 @@
 				echo '</div>';
 			}
 		?>
-    <?php
-      if($this->session->flashdata('message'))
-      {
-    ?>
-        <div class="alert alert-danger">
-            <?php
-            echo $this->session->flashdata('message');
-            ?>
-        </div>
-    <?php
-    }
+    <?php 
+			if($this->session->flashdata('errorCaptchaR') !='')
+			{
+				echo '<div class="alert alert-danger" role="alert">';
+				echo $this->session->flashdata('errorCaptchaR');
+				echo '</div>';
+			}
+		?>
 
-    if($this->session->flashdata('success_message'))
-    {
-    ?>
-        <div class="alert alert-success">
-            <?php
-            echo $this->session->flashdata('success_message');
-            ?>
-        </div>
-    <?php
-    }
-    ?>
-
-  <form method="post" action="<?php echo base_url('index.php/home/registCheck'); ?>">
+  <form method="post" action="<?php echo base_url(); ?>index.php/home/registCheck/">
     <div class="mb-3">
       <label for="username" class="form-label">Username</label>
       <input type="text" class="form-control" name="username" id="username" placeholder="Enter Username">
