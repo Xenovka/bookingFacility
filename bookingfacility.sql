@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2021 at 05:29 AM
+-- Generation Time: Dec 02, 2021 at 06:48 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -30,20 +30,21 @@ SET time_zone = "+00:00";
 CREATE TABLE `facility` (
   `FacilityID` int(11) NOT NULL,
   `FacilityName` varchar(255) NOT NULL,
-  `Image` varchar(255) NOT NULL
+  `Image` varchar(255) NOT NULL,
+  `FacilityDetail` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `facility`
 --
 
-INSERT INTO `facility` (`FacilityID`, `FacilityName`, `Image`) VALUES
-(1, 'Colaborative Lab', 'colaborative_lab.jpg'),
-(2, 'Lab Computer', 'lab_computer.jpg'),
-(3, 'Lecture Theater', 'lecture_theater.jpg'),
-(4, 'Meeting Room', 'meeting_room.jpg'),
-(5, 'Studio Greenscreen', 'studio_greenscreen.jpg'),
-(6, 'Studio Photo', 'studio_photo.jpg');
+INSERT INTO `facility` (`FacilityID`, `FacilityName`, `Image`, `FacilityDetail`) VALUES
+(1, 'Colaborative Lab', 'colaborative_lab.jpg', 'A laboratory equipped with technological tools that can help students hold discussions and design concepts. Here, UMN obligates students to work and learn together. In this collaborative laboratory, students actively interact with one another by sharing their experiences and knowledge. Discussions are also held digitally (online forums, chat rooms and more).'),
+(2, 'Lab Computer', 'lab_computer.jpg', 'This laboratory is used to operate various designing activities, construction, development, and testing mobile applications, both native application (Android, iOS), hybrid, or mobile web.'),
+(3, 'Lecture Theater', 'lecture_theater.jpg', 'With a larger capacity compared to the other halls, the Lecture Theatre can accommodate up to 500 people running various activities such as seminars, workshops, lectures with guest lecturers, and UKM shows (Student Activity Unit) which are all displayed in this theater room.'),
+(4, 'Meeting Room', 'meeting_room.jpg', 'A room for meeting'),
+(5, 'Studio Greenscreen', 'studio_greenscreen.jpg', 'This studio is specifically designed to make films and animations. Recording a scene can be taken from 3 different angles by utilizing various facilities, such as towing (tools for lifting people), lights, costumes, point sensors motion, and green screen.'),
+(6, 'Studio Photo', 'studio_photo.jpg', 'This photography studio is used for lectures, academic assignments, research, and final project. With a studio equipped with a high resolution DSLR camera attached with a zooming lens, wide lens, fixed lens and macro lens, students can explore in producing photo works towards journalism, products, fashion, and others. This studio is also contains backdrop, flash lighting, flash trigger, umbrella, soft box, snoot, new door, filter, and honey comb.');
 
 -- --------------------------------------------------------
 
@@ -90,7 +91,20 @@ CREATE TABLE `reserveduser` (
 
 INSERT INTO `reserveduser` (`RequestID`, `RequesterID`, `ReqFacilityID`, `Date`, `StartTime`, `EndTime`, `Status`) VALUES
 (1, 3, 4, '2021-12-03', '13:29:00', '16:29:00', 'Wait'),
-(2, 1, 3, '2021-12-03', '19:00:00', '21:00:00', 'Wait');
+(2, 1, 3, '2021-12-03', '19:00:00', '21:00:00', 'Declined'),
+(4, 1, 4, '2021-12-23', '19:00:00', '21:00:00', ''),
+(5, 1, 3, '2021-12-08', '19:00:00', '21:00:00', ''),
+(6, 1, 4, '2021-12-08', '19:00:00', '21:00:00', 'Wait'),
+(7, 1, 5, '2021-12-16', '19:00:00', '21:00:00', 'Wait'),
+(8, 1, 3, '2021-12-18', '19:00:00', '21:00:00', 'Wait'),
+(9, 1, 2, '2021-12-17', '19:00:00', '22:00:00', 'Wait'),
+(12, 1, 2, '2021-12-29', '19:00:00', '21:00:00', 'Wait'),
+(13, 1, 6, '2021-12-21', '09:00:00', '11:00:00', 'Wait'),
+(14, 1, 3, '2021-12-31', '19:00:00', '11:00:00', 'Wait'),
+(15, 1, 2, '2021-12-30', '19:00:00', '21:00:00', 'Wait'),
+(17, 1, 4, '2021-12-08', '19:00:00', '11:00:00', 'Wait'),
+(18, 1, 1, '2021-12-08', '19:00:00', '21:00:00', 'Wait'),
+(19, 1, 1, '2021-12-21', '19:00:00', '21:00:00', 'Wait');
 
 -- --------------------------------------------------------
 
@@ -190,13 +204,13 @@ ALTER TABLE `facility`
 -- AUTO_INCREMENT for table `requests`
 --
 ALTER TABLE `requests`
-  MODIFY `RequestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `RequestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `reserveduser`
 --
 ALTER TABLE `reserveduser`
-  MODIFY `RequestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `RequestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `user`
