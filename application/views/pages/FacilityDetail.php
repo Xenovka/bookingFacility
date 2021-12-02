@@ -10,7 +10,7 @@
                         </p>
                     </div>
                     <div>
-                        <a href="http://localhost/bookingFacility/index.php/user/requests/add"><button class="btn btn-primary">Book</button></a>
+                        <a href="http://localhost/bookingFacility/index.php/user/requests/add?FID='.$row['FacilityID'].'"><button class="btn btn-primary">Book</button></a>
                         <a href="'.site_url('user').'"><button class="btn btn-primary">Back</button></a>
                     </div>
                 </div>';

@@ -54,10 +54,10 @@ class User extends CI_Controller {
     $crud->columns('RequestID','ReqFacilityID','Date','StartTime','EndTime','Status');
     $crud->change_field_type('StartTime','time');
     $crud->change_field_type('EndTime','time');
-    $crud->set_relation('ReqFacilityID','facility','FacilityName');
     $crud->display_as('ReqFacilityID','Requested Facility');
     $crud->callback_add_field('RequesterID',array($this, 'insert_requester'));//Masukkin UserID nya gimana ya? wkwk
     $crud->callback_add_field('Status',array($this, 'insert_status'));
+    $crud->callback_add_field('ReqFacilityID',array($this, 'insert_facilityName'));
     $crud->callback_after_insert(array($this, 'duplicate_to_requests'));
     // $crud->callback_before_insert(array($this,'clone'));
     // $crud->callback_before_update(array($this, 'clone'));
@@ -76,6 +76,11 @@ class User extends CI_Controller {
     $this->template->load('template/template_navbar', 'pages/RequestListing', $data);
   }
 
+  public function insert_facilityName($value, $primary_key) {
+    return '<input type="text" maxlength="50" value="'.$this->manage->getFacilityName($_GET['FID']).'" name="ReqFacilityID" style="width:462px" disabled>
+    <input type="text" maxlength="50" value="'.$_GET['FID'].'" name="ReqFacilityID" style="width:462px" hidden>';
+  }
+
   public function insert_requester($value, $primary_key){
     return '<input type="text" maxlength="50" value="'.$_SESSION['account']['UserID'].'" name="RequesterID" style="width:462px" disabled>
     <input type="text" maxlength="50" value="'.$_SESSION['account']['UserID'].'" name="RequesterID" style="width:462px" hidden>';
@@ -88,6 +93,7 @@ class User extends CI_Controller {
 
   public function duplicate_to_requests($post_array, $primary_key) {
     $_SESSION['after_insert'] = $post_array;
+    unset($_SESSION['FacilityName']);
   }
 
   public function facilityDetail($id){

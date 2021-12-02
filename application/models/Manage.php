@@ -25,4 +25,10 @@ class Manage extends CI_Model {
     $query = $this->db->query("SELECT * FROM facility WHERE FacilityID = $id");
 		return $query->result_array();
   }
+
+  public function getFacilityName($id) {
+    $query = $this->db->query("SELECT FacilityName FROM facility WHERE FacilityID = $id");
+    $query = $query->row_array();
+    return $query['FacilityName'];
+  }
 }
