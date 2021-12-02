@@ -20,6 +20,7 @@ class User extends CI_Controller {
     $this->load->library('grocery_CRUD');
     $crud = new grocery_CRUD();
     $crud->set_table('facility');
+    $crud->set_theme('tablestrap');
 
     $output = $crud->render();
     $data['title'] = 'Booking Facility Website — Facility Listing';
@@ -102,6 +103,7 @@ class User extends CI_Controller {
     $this->load->library('grocery_CRUD');
     $crud = new grocery_CRUD();
     $crud->set_table('facility');
+    $crud->set_theme('tablestrap');
 
     $output = $crud->render();
     $data['title'] = 'Booking Facility Website — Facility Datail';

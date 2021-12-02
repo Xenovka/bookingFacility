@@ -1,5 +1,5 @@
 <script src='https://www.google.com/recaptcha/api.js'></script>
-<div class="container login__wrapper">
+<div class="container login__wrapper" data-aos="zoom-in">
   <h1 class="text-center mb-5 login__main-title">Login Here</h1>
   <?php 
 			if($this->session->flashdata('errorCaptchaL') !='')
@@ -12,13 +12,13 @@
   <form action="<?= site_url("/home/login") ?>" method="POST">
     <div class="mb-3">
       <label class="form-label" for="email">Email</label>
-      <input class="form-control" id='email' type="email" name="email" placeholder="Input Email">
+      <input class="form-control" id='email' type="email" name="email" placeholder="Input Email" required>
     </div>
     <?= form_error('email', "<p class='alert alert-danger'>", "</p>") ?>
 
     <div class="mb-3">
       <label class="form-label" for="password">Password</label>
-      <input class="form-control" id='password' type="password" name="password" placeholder="Input Password ">
+      <input class="form-control" id='password' type="password" name="password" placeholder="Input Password" required>
     </div>
     <?= form_error('password', "<p class='alert alert-danger'>", "</p>") ?>
 
