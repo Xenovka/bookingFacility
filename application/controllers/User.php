@@ -65,6 +65,7 @@ class User extends CI_Controller {
     // $crud->callback_before_delete(array($this, 'clone'));
     // $crud->callback_before_upload(array($this, 'clone'));
     // $crud->callback_before_clone(array($this, 'clone'));
+    $crud->unset_add();
     $crud->unset_edit();
     $crud->unset_delete();
     $crud->unset_print();
