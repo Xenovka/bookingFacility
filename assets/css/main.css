@@ -10,16 +10,13 @@ html {
 	font-family: "Roboto", sans-serif;
 }
 
-.add_button {
-	display: none !important;
-}
-
 /* NAVBAR */
 .navbar {
 	padding: 0;
 }
 
 .navbar-brand {
+	text-transform: uppercase;
 	font-weight: 600;
 }
 

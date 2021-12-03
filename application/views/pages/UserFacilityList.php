@@ -3,7 +3,7 @@
   <div class="row g-5">
     <?php foreach($facility as $row)
         {
-            echo '<div class="col-4" data-aos="zoom-in">
+            echo '<div class="col-lg-4 col-sm-6" data-aos="zoom-in">
                     <div class="facility__card">
                         <a class="facility__card-details" href="'.site_url('user/facilityDetail/'.$row['FacilityID']).'">
                             <div class="facility__card-image">

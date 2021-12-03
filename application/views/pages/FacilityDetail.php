@@ -4,7 +4,7 @@
                 <h1 class="mt-5 login__main-title text-center">'.$row['FacilityName'].'</h1>
                 <div class="row fdetails__wrapper">
                     <div class="col-6 fdetails__image-wrapper">
-                        <div class="">
+                        <div class="fdetails__image">
                             <img class="card-img-top" src="'.base_url().'assets/images/facility/'.$row['Image'].'" alt="'. $row['FacilityName'] .'" title="'. $row['FacilityName'] .'">
                         </div>
                     </div>
