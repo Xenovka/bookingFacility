@@ -78,6 +78,14 @@
 	.hidden-xs {
 		display: inline-block !important;
 	}
+
+	.error__title {
+		font-size: 32px;
+	}
+
+	.error__description {
+		font-size: 16px;
+	}
 }
 
 @media only screen and (max-width: 580px) {
