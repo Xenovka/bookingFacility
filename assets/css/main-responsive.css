@@ -1,0 +1,60 @@
+@media only screen and (max-width: 1000px) {
+	.home__button-login,
+	.home__button-register {
+		font-weight: 500;
+		margin: 0 auto;
+		display: block;
+		padding: 6px 12px;
+		width: 15%;
+		transition: all 0.3s ease;
+	}
+}
+
+@media only screen and (max-width: 780px) {
+	.home__button-login,
+	.home__button-register {
+		font-weight: 500;
+		margin: 0 auto;
+		display: block;
+		padding: 6px 12px;
+		width: 20%;
+		transition: all 0.3s ease;
+	}
+}
+
+@media only screen and (max-width: 580px) {
+	.home__wrapper {
+		width: 90% !important;
+	}
+
+	.home__main-title {
+		font-size: 28px;
+		padding-bottom: 10px;
+		margin: 0;
+	}
+}
+
+@media only screen and (max-width: 400px) {
+	.home__wrapper {
+		width: 95%;
+	}
+
+	.home__main-description {
+		font-size: 12px;
+	}
+
+	.home__main-title {
+		font-size: 20px;
+	}
+
+	.home__button-login,
+	.home__button-register {
+		font-size: 12px;
+		font-weight: 500;
+		margin: 0 auto;
+		display: block;
+		padding: 6px 12px;
+		width: 30%;
+		transition: all 0.3s ease;
+	}
+}
