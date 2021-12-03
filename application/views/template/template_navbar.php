@@ -33,6 +33,7 @@
   <link type="text/css" rel="stylesheet" href="<?php echo $file; ?>" />
   <?php endforeach; ?>
   <link rel="stylesheet" href="<?= base_url(); ?>assets/css/main.css">
+  <link rel="stylesheet" href="<?= base_url(); ?>assets/css/main-responsive.css">
 </head>
 
 <body>
