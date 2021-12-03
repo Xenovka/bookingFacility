@@ -1,4 +1,10 @@
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1200px) {
+	.home__wrapper,
+	.login__wrapper,
+	.register__wrapper {
+		width: 45% !important;
+	}
+
 	.home__button-login,
 	.home__button-register {
 		font-weight: 500;
@@ -11,6 +17,12 @@
 }
 
 @media only screen and (max-width: 780px) {
+	.home__wrapper,
+	.login__wrapper,
+	.register__wrapper {
+		width: 55% !important;
+	}
+
 	.home__button-login,
 	.home__button-register {
 		font-weight: 500;
@@ -23,7 +35,9 @@
 }
 
 @media only screen and (max-width: 580px) {
-	.home__wrapper {
+	.home__wrapper,
+	.login__wrapper,
+	.register__wrapper {
 		width: 90% !important;
 	}
 
@@ -35,7 +49,9 @@
 }
 
 @media only screen and (max-width: 400px) {
-	.home__wrapper {
+	.home__wrapper,
+	.login__wrapper,
+	.register__wrapper {
 		width: 95%;
 	}
 
