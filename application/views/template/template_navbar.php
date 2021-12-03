@@ -84,6 +84,12 @@
   <script>
   AOS.init();
 
+  const isUser = location.href.split('/').findIndex(val => val === 'user');
+
+  if (isUser !== -1) {
+    $('.add_button').hide()
+  }
+
   function logout() {
     document.location.href = "<?= site_url("home/logout") ?>";
   }
