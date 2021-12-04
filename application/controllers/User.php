@@ -53,18 +53,13 @@ class User extends CI_Controller {
     $crud->set_table('reserveduser');
     $crud->set_subject('Request');
     $crud->columns('RequestID','ReqFacilityID','Date','StartTime','EndTime','Status');
-    $crud->change_field_type('StartTime','time');
-    $crud->change_field_type('EndTime','time');
     $crud->display_as('ReqFacilityID','Requested Facility');
-    $crud->callback_add_field('RequesterID',array($this, 'insert_requester'));//Masukkin UserID nya gimana ya? wkwk
+    $crud->callback_add_field('RequesterID',array($this, 'insert_requester'));
     $crud->callback_add_field('Status',array($this, 'insert_status'));
     $crud->callback_add_field('ReqFacilityID',array($this, 'insert_facilityName'));
+    $crud->callback_add_field('StartTime',array($this, 'insert_StartTime'));
+    $crud->callback_add_field('EndTime',array($this, 'insert_EndTime'));
     $crud->callback_after_insert(array($this, 'duplicate_to_requests'));
-    // $crud->callback_before_insert(array($this,'clone'));
-    // $crud->callback_before_update(array($this, 'clone'));
-    // $crud->callback_before_delete(array($this, 'clone'));
-    // $crud->callback_before_upload(array($this, 'clone'));
-    // $crud->callback_before_clone(array($this, 'clone'));
     $crud->unset_edit();
     $crud->unset_delete();
     $crud->unset_print();
@@ -90,6 +85,14 @@ class User extends CI_Controller {
   public function insert_status($value, $primary_key){
     return '<input type="text" maxlength="50" value="Waiting For Approval" name="Status" style="width:462px" disabled>
     <input type="text" maxlength="50" value="Waiting For Approval" name="Status" style="width:462px" hidden>';
+  }
+
+  public function insert_StartTime(){
+    return '<input type="time" name="StartTime" style="width:462px">';
+  }
+
+  public function insert_EndTime(){
+    return '<input type="time" name="EndTime" style="width:462px">';
   }
 
   public function duplicate_to_requests($post_array, $primary_key) {
