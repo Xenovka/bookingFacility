@@ -12,7 +12,7 @@
                         <p class="fdetails__description">
                             '.$row['FacilityDetail'].'
                         </p>
-                        <a href="http://localhost/bookingFacility/index.php/user/requests/add?FID='.$row['FacilityID'].'"><button class="btn button__book">Book</button></a>
+                        <a href="'.site_url("user/requests/add?FID=").$row['FacilityID'].'"><button class="btn button__book">Book</button></a>
                         <a href="'.site_url('user').'"><button class="btn button__back">Back</button></a>
                     </div>
                 </div>
