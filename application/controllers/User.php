@@ -59,7 +59,6 @@ class User extends CI_Controller {
     $crud->callback_add_field('ReqFacilityID',array($this, 'insert_facilityName'));
     $crud->callback_add_field('StartTime',array($this, 'insert_StartTime'));
     $crud->callback_add_field('EndTime',array($this, 'insert_EndTime'));
-    $crud->callback_after_insert(array($this, 'duplicate_to_requests'));
     $crud->unset_edit();
     $crud->unset_delete();
     $crud->unset_print();
@@ -93,11 +92,6 @@ class User extends CI_Controller {
 
   public function insert_EndTime(){
     return '<input type="time" name="EndTime" style="width:462px">';
-  }
-
-  public function duplicate_to_requests($post_array, $primary_key) {
-    $_SESSION['after_insert'] = $post_array;
-    unset($_SESSION['FacilityName']);
   }
 
   public function facilityDetail($id){

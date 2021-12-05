@@ -44,12 +44,14 @@ class Management extends CI_Controller {
     $this->load->library('grocery_CRUD');
     $crud = new grocery_CRUD();
     $crud->set_theme('tablestrap');
-    $crud->set_table('requests');
+    $crud->set_table('reserveduser');
     $crud->set_subject('Request');
     $crud->change_field_type('StartTime', 'time');
     $crud->change_field_type('EndTime', 'time');
     $crud->set_relation('RequesterID', 'user', 'Username');
     $crud->set_relation('ReqFacilityID', 'facility', 'FacilityName');
+    $where = 'Status =';
+    $crud->where($where,'Waiting For Approval');
     $crud->unset_add();
     $crud->unset_edit();
     $crud->unset_delete();
@@ -68,13 +70,11 @@ class Management extends CI_Controller {
   }
 
   public function accept($id) {
-    $this->manage->deleteRequest($id);
     $this->manage->acceptReserved($id);
     redirect(site_url("management/requests"));
   }
 
   public function decline($id) {
-    $this->manage->deleteRequest($id);
     $this->manage->declineReserved($id);
     redirect(site_url("management/requests"));
   }

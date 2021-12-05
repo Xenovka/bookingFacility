@@ -74,7 +74,7 @@ class Admin extends CI_Controller {
     $this->load->library('grocery_CRUD');
     $crud = new grocery_CRUD();
     $crud->set_theme('tablestrap');
-    $crud->set_table('requests');
+    $crud->set_table('reserveduser');
     $crud->set_subject('Request');
     $crud->change_field_type('StartTime','time');
     $crud->change_field_type('EndTime','time');

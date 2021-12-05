@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2021 at 06:48 AM
+-- Generation Time: Dec 05, 2021 at 07:00 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -49,29 +49,6 @@ INSERT INTO `facility` (`FacilityID`, `FacilityName`, `Image`, `FacilityDetail`)
 -- --------------------------------------------------------
 
 --
--- Table structure for table `requests`
---
-
-CREATE TABLE `requests` (
-  `RequestID` int(11) NOT NULL,
-  `RequesterID` int(11) NOT NULL,
-  `ReqFacilityID` int(11) NOT NULL,
-  `Date` date NOT NULL,
-  `StartTime` time NOT NULL,
-  `EndTime` time NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `requests`
---
-
-INSERT INTO `requests` (`RequestID`, `RequesterID`, `ReqFacilityID`, `Date`, `StartTime`, `EndTime`) VALUES
-(1, 3, 4, '2021-12-03', '13:29:00', '16:29:00'),
-(2, 1, 3, '2021-12-03', '19:00:00', '21:00:00');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `reserveduser`
 --
 
@@ -90,21 +67,10 @@ CREATE TABLE `reserveduser` (
 --
 
 INSERT INTO `reserveduser` (`RequestID`, `RequesterID`, `ReqFacilityID`, `Date`, `StartTime`, `EndTime`, `Status`) VALUES
-(1, 3, 4, '2021-12-03', '13:29:00', '16:29:00', 'Wait'),
-(2, 1, 3, '2021-12-03', '19:00:00', '21:00:00', 'Declined'),
-(4, 1, 4, '2021-12-23', '19:00:00', '21:00:00', ''),
-(5, 1, 3, '2021-12-08', '19:00:00', '21:00:00', ''),
-(6, 1, 4, '2021-12-08', '19:00:00', '21:00:00', 'Wait'),
-(7, 1, 5, '2021-12-16', '19:00:00', '21:00:00', 'Wait'),
-(8, 1, 3, '2021-12-18', '19:00:00', '21:00:00', 'Wait'),
-(9, 1, 2, '2021-12-17', '19:00:00', '22:00:00', 'Wait'),
-(12, 1, 2, '2021-12-29', '19:00:00', '21:00:00', 'Wait'),
-(13, 1, 6, '2021-12-21', '09:00:00', '11:00:00', 'Wait'),
-(14, 1, 3, '2021-12-31', '19:00:00', '11:00:00', 'Wait'),
-(15, 1, 2, '2021-12-30', '19:00:00', '21:00:00', 'Wait'),
-(17, 1, 4, '2021-12-08', '19:00:00', '11:00:00', 'Wait'),
-(18, 1, 1, '2021-12-08', '19:00:00', '21:00:00', 'Wait'),
-(19, 1, 1, '2021-12-21', '19:00:00', '21:00:00', 'Wait');
+(23, 6, 1, '2021-12-26', '18:47:00', '20:47:00', 'Waiting For Approval'),
+(24, 6, 3, '2021-12-29', '13:39:00', '19:45:00', 'Declined'),
+(25, 6, 4, '2021-12-20', '12:47:00', '15:47:00', 'Accepted'),
+(26, 6, 4, '2021-12-20', '12:48:00', '15:48:00', 'Waiting For Approval');
 
 -- --------------------------------------------------------
 
@@ -147,9 +113,10 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`UserID`, `Username`, `Email`, `Password`, `Role`, `Image`) VALUES
 (1, 'agung123', 'agung@umn.ac.id', '$2y$10$2UCelXL./iuwRY0Nv6NuPuJcnBy/nfsSOrnsGJaI1./baKzz2OPNe', 1, ''),
-(3, 'Vallencius', 'vallencius.siswanto@student.umn.ac.id', '$2y$10$CRUpdchAR9sLJa8AUczWEu2TjnV4SUtxcjMIoqVPaIdfc09R5gFaa', 1, 'ceef7-fotovallen.jpg'),
-(4, 'Vallencius111', 'admin@umn.ac.id', '$2y$10$TFqJB.YMtoZr.TwIovywduvkaeHHe5nc1nn5coypaJub6ljfoEjZq', 2, ''),
-(6, 'CobaCoba', 'vallencius1901@gmail.com', '$2y$10$Ca847wTzkmk20pItyT0mUOwrdxYEsXwtn74A.v6CzF5PmxNX//qki', 3, '');
+(6, 'CobaCoba', 'vallencius1901@gmail.com', '$2y$10$Ca847wTzkmk20pItyT0mUOwrdxYEsXwtn74A.v6CzF5PmxNX//qki', 3, ''),
+(7, 'Manager', 'Man@gmail.com', '$2y$10$2UCelXL./iuwRY0Nv6NuPuJcnBy/nfsSOrnsGJaI1./baKzz2OPNe', 2, ''),
+(8, 'atras.Tras', 'atras@umn.ac.id', '$2y$10$J5dixijQuSLh5Hi/DrI4E.2x8tUm9811k9KMFZDa8MQWkOjRKNgYK', 3, ''),
+(9, 'antoniusK', 'antonius@umn.ac.id', '$2y$10$EmQHVkTFwRtffCW8ZOUgG.Iq2ba3TVIQAr.yeCePgUpbn.hgDWwRG', 3, '');
 
 --
 -- Indexes for dumped tables
@@ -160,14 +127,6 @@ INSERT INTO `user` (`UserID`, `Username`, `Email`, `Password`, `Role`, `Image`) 
 --
 ALTER TABLE `facility`
   ADD PRIMARY KEY (`FacilityID`);
-
---
--- Indexes for table `requests`
---
-ALTER TABLE `requests`
-  ADD PRIMARY KEY (`RequestID`),
-  ADD KEY `ReqFacilityID` (`ReqFacilityID`),
-  ADD KEY `RequesterID` (`RequesterID`);
 
 --
 -- Indexes for table `reserveduser`
@@ -201,33 +160,20 @@ ALTER TABLE `facility`
   MODIFY `FacilityID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `requests`
---
-ALTER TABLE `requests`
-  MODIFY `RequestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
 -- AUTO_INCREMENT for table `reserveduser`
 --
 ALTER TABLE `reserveduser`
-  MODIFY `RequestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `RequestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `requests`
---
-ALTER TABLE `requests`
-  ADD CONSTRAINT `requests_ibfk_1` FOREIGN KEY (`ReqFacilityID`) REFERENCES `facility` (`FacilityID`),
-  ADD CONSTRAINT `requests_ibfk_2` FOREIGN KEY (`RequesterID`) REFERENCES `user` (`UserID`);
 
 --
 -- Constraints for table `reserveduser`
