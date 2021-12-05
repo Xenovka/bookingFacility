@@ -75,10 +75,6 @@
 		font-size: 14px;
 	}
 
-	a.add_button {
-		display: none !important;
-	}
-
 	.hidden-xs {
 		display: inline-block !important;
 	}

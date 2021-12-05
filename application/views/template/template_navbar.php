@@ -88,6 +88,7 @@
 
   if (isUser !== -1) {
     $('.add_button').hide()
+    $('.add_button').removeClass('hidden-xs')
   }
 
   function logout() {
