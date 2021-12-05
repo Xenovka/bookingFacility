@@ -31,7 +31,7 @@
     <div class="mb-3">
       <!-- <div class="g-recaptcha" data-sitekey="6LdnJXwdAAAAALqGq9_yDkY5iAeuPPq6MvfZvsGi"></div> -->
       <!-- untuk localhost -->
-      <div class="g-recaptcha" data-sitekey="6Lf6Cm8dAAAAAGflr6iNKHEh6x27kZ2OScKS7anq"></div> => untuk localhost
+      <!-- <div class="g-recaptcha" data-sitekey="6Lf6Cm8dAAAAAGflr6iNKHEh6x27kZ2OScKS7anq"></div>  -->
     </div>
     <button class="btn login__button" type="submit">Submit</button>
   </form>
