@@ -30,6 +30,10 @@ class User extends CI_Controller {
   }
 
   public function requests(){
+    // $arr = $this->manage->getBookingInfo();
+    // $result = $arr[0]['']
+    // var_dump($this->input->get('FID'));
+    // die;
     if(isset($_SESSION['after_insert'])) {      
       $config = [
         "Date" => implode("-", array_reverse(explode("/", $_SESSION['after_insert']['Date']))),
@@ -59,6 +63,10 @@ class User extends CI_Controller {
     $crud->callback_add_field('ReqFacilityID',array($this, 'insert_facilityName'));
     $crud->callback_add_field('StartTime',array($this, 'insert_StartTime'));
     $crud->callback_add_field('EndTime',array($this, 'insert_EndTime'));
+    $crud->set_rules('Date','Date','callback_validationDate');
+    $crud->set_rules('StartTime','Start Time','callback_validationTime');
+    // $crud->callback_before_insert(array($this, "validationDate"));
+    // $crud->callback_before_insert(array($this, "validationTime"));
     $crud->unset_edit();
     $crud->unset_delete();
     $crud->unset_print();
@@ -70,6 +78,51 @@ class User extends CI_Controller {
     $data['title'] = 'Booking Facility Website — Request Listing';
     $this->template->load('template/template_navbar', 'pages/RequestListing', $data);
   }
+
+  // public function validationDate($post_array, $primary_key) {
+  //   return (strtotime($post_array['Date']) < strtotime('now')) ? false : true ;
+  // }
+
+  public function validationTime($StartTime) {
+    if($StartTime > $_POST['EndTime']) {
+      $this->form_validation->set_message("validationTime", "Start Time harus lebih awal daripada End Time!");
+      return false;
+    }
+
+    // $bookedFacility = $this->manage->getBookingInfo();
+    
+    // foreach($bookedFacility as $each) {
+    //   if ($StartTime > $each['StartTime'] &&
+    //       $StartTime < $each['EndTime'] &&
+    //       $this->input->get('FID') == $each['FacilityID'] &&
+    //       $_POST['Date'] == $each['Date']) return false;
+      
+    //   else if ($_POST['EndTime'] > $each["StartTime"] &&
+    //           $_POST['EndTime'] < $each['EndTime'] &&
+    //           $this->input->get('FID') == $each['FacilityID'] &&
+    //           $each['Date'] == $_POST['Date']) return false;
+      
+      // if($each['Date'] == $_POST['Date'] && $each['ReqFacilityID'] == $this->input->get('FID') && $StartTime > $each['StartTime'] && $_POST['EndTime'] < $each['EndTime']) {
+      //   $this->form_validation->set_message("validationTime", "Maaf, waktu pada jam tersebut sudah di booking oleh {$each['Username']}");
+      //   return false;
+      // }
+    // }
+
+    return true;
+  }
+
+  public function validationDate() {
+    if(strtotime(implode("-", explode("/", $_POST['Date']))) < strtotime("now")) {
+      $this->form_validation->set_message("validationDate", "Tanggal reservasi harus di masa mendatang!");
+      return false;
+    } else {
+      return true;
+    };
+  }
+
+  // public function validationTime($post_array, $primary_key) {
+
+  // }
 
   public function insert_facilityName($value, $primary_key) {
     return '<input type="text" maxlength="50" value="'.$this->manage->getFacilityName($_GET['FID']).'" name="ReqFacilityID" style="width:462px" disabled>
