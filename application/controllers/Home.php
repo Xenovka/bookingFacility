@@ -102,7 +102,8 @@ class Home extends CI_Controller {
           if($captcha_response != '')
           {
             $keySecret = '6LdnJXwdAAAAADJSD9sHpyWzJzY_8Bnf1HITyfal';
-            // $keySecret = '6Lf6Cm8dAAAAAM3xM1v2kY9ichIo9tsyTMW9tsuw'; --> untuk Localhost
+            // key untuk localhost
+            // $keySecret = '6Lf6Cm8dAAAAAM3xM1v2kY9ichIo9tsyTMW9tsuw'; 
 
             $check = array(
               'secret'		=>	$keySecret,
