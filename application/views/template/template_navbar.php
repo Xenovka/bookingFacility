@@ -85,8 +85,9 @@
   AOS.init();
 
   const isUser = location.href.split('/').findIndex(val => val === 'user');
+  const isAdmin = location.href.split('/').findIndex(val => val === 'admin')
 
-  if (isUser !== -1) {
+  if (isUser !== -1 && isAdmin === -1) {
     $('.add_button').hide()
     $('.add_button').removeClass('hidden-xs')
   }
