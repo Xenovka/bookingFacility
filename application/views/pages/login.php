@@ -28,7 +28,7 @@
         unset($_SESSION['error']);
       }
     ?>
-    <div class="g-recaptcha" data-sitekey="6Lf6Cm8dAAAAAGflr6iNKHEh6x27kZ2OScKS7anq"></div>
+    <div class="g-recaptcha" data-sitekey="6LdnJXwdAAAAALqGq9_yDkY5iAeuPPq6MvfZvsGi"></div>
     <button class="btn login__button" type="submit">Submit</button>
   </form>
 

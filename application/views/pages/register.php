@@ -32,7 +32,7 @@
       <label for="password" class="form-label">Password</label>
       <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
     </div>
-    <div class="g-recaptcha" data-sitekey="6Lf6Cm8dAAAAAGflr6iNKHEh6x27kZ2OScKS7anq"></div>
+    <div class="g-recaptcha" data-sitekey="6LdnJXwdAAAAALqGq9_yDkY5iAeuPPq6MvfZvsGi"></div>
     <button type="submit" class="btn register__button">Register</button>
   </form>
 
