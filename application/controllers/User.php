@@ -65,6 +65,7 @@ class User extends CI_Controller {
     $crud->callback_add_field('EndTime',array($this, 'insert_EndTime'));
     $crud->set_rules('Date','Date','callback_validationDate');
     $crud->set_rules('StartTime','Start Time','callback_validationTime');
+    // $crud->set_rules('EndTime','End Time','callback_bookingAvailable');
     // $crud->callback_before_insert(array($this, "validationDate"));
     // $crud->callback_before_insert(array($this, "validationTime"));
     $crud->unset_edit();
@@ -81,6 +82,31 @@ class User extends CI_Controller {
 
   // public function validationDate($post_array, $primary_key) {
   //   return (strtotime($post_array['Date']) < strtotime('now')) ? false : true ;
+  // }
+
+  // public function bookingAvailable($EndTime){
+  //   // $this->load->database();
+  //   $id = $this->input->get('FID');
+  //   $date = implode("-", explode("/", $_POST['Date']));
+  //   // $query = $this->db->query("SELECT StartTime, EndTime, `Date`, ReqFacilityID FROM reserveduser WHERE ReqFacilityID = $id");
+  //   // $bookedFacility = $query->result_array();
+  //   $bookedFacility = $this->manage->getBookingInfo($id, $date);
+  //   foreach($bookedFacility as $each) {
+  //       // if ($_POST['Date'] == $each['Date'])
+  //       //     {
+  //             if($EndTime > $each['StartTime'] &&
+  //             $EndTime < $each['EndTime'] ){
+  //                  $this->form_validation->set_message("bookingAvailable", "Maaf, waktu pada jam tersebut sudah di booking");
+  //                  return false;
+  //                }
+  //                else if($_POST['StartTime'] > $each["StartTime"] &&
+  //                $_POST['StartTime'] < $each['EndTime']){
+  //                         $this->form_validation->set_message("bookingAvailable", "Maaf, waktu pada jam tersebut sudah di booking");
+  //                         return false;
+  //                       }
+  //           // }
+  //         }
+  //         return true;
   // }
 
   public function validationTime($StartTime) {

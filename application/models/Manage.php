@@ -37,4 +37,11 @@ class Manage extends CI_Model {
   //   $query = $query->result_array();
   //   return $query;
   // }
+  // public function getBookingInfo($id,$date) {
+  //   $query = $this->db->query("SELECT StartTime, EndTime, `Date`, ReqFacilityID
+  //     FROM reserveduser WHERE ReqFacilityID = $id AND `Date` = $date");
+
+  //   $query = $query->result_array();
+  //   return $query;
+  // }
 }
